@@ -1,0 +1,30 @@
+Vim Commands:
+
+Command Mode(Esc):
+:q! - exit without saving
+:wq - write and quit
+:set number - line number
+:set relativenumber - relative line numbers
+
+(number) + arrow - moves you more lines / characters
+d - delete
+dd - delete line
+yy - copy line
+u - undo
+p - paste line below
+ctrl + r - redo
+
+Insert Mode(i,a,o):
+shift + i - beggining of line
+shift + a - end of line
+shift + o - new line above
+o - new line below
+a - after cursor
+
+Visual Mode(Esc + v):
+d - delete
+u - undo
+y - yanking(copying)
+p - paste
+
+! - before anything signals a terminal command (ie. !ls)

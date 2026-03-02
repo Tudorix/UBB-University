@@ -1,0 +1,7 @@
+ps - processes(-fax)
+
+< - input redirq
+> - output redir
+>> - append
+
+> /dev/null - abis
