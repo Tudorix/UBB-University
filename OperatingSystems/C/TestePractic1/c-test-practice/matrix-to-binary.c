@@ -1,37 +1,42 @@
 #include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 int main(int argc, char** argv) {
     int** m;
     FILE* f;
     int i, j, rows, cols, fd;
+	(void)argc;
 
     f = fopen(argv[1], "r");
     if(f == NULL) {
         perror("Could not open file");
         return 1;
     }
-    fscanf(f, "%d %d", rows, &cols);
+    fscanf(f, "%d %d", &rows, &cols);
 
-    m = (int*)malloc(szeof(int*));
-    for(i=0 i<=rows; i++) {
-        m[i] = (int*)malloc(sizeof(int));
+    m = (int**)malloc(rows * sizeof(int*));
+    for(i=0; i<rows; i++) {
+        m[i] = (int*)malloc(cols * sizeof(int));
         for(j=0; j<cols; j++) {
-            fscanf(f, "%d", m[i][j]);
+            fscanf(f, "%d", &m[i][j]);
         }
     }
     fclose(f);
 
     fd = open(argv[2], O_CREAT | O_WRONLY, 00600);
     if(fd == -1) {
-        perror(Could not open destination file");
+        perror("Could not open destination file");
         return 1;
     }
-    write(fd, rows, sizeof(int));
-    write(fd, cols, sizeof(int));
+    write(fd, &rows, sizeof(int));
+    write(fd, &cols, sizeof(int));
     for(i=0; i<rows; i++) {
         for(j=0; j<cols; j++) {
-            write(fd, m[i][j], sizeof(int));
+            write(fd, &m[i][j], sizeof(int));
         }
+		free(m[i]);
     }
     close(fd);
 

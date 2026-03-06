@@ -68,6 +68,42 @@ void task_16(unsigned n){
 }
 
 
+int pali(int n){    
+    /**
+     * Functie care verifica daca un nr e palindrom
+     * 
+     * @param n (int) - numarul pe care il verificam
+     * 
+     * @pre n - numar intreg
+     * @post returneaza 1 daca e pali., 0 altfel
+     */
+    int ogl = 0;
+    int cn = n;
+    while(cn){
+        ogl = ogl * 10 + cn % 10;
+        cn /= 10;
+    }
+
+    return (n == ogl) ? 1 : 0;
+}
+
+
+void task_lab(int n){
+        /**
+     * Functie care printeaza toate palindroamele mai mici sau egale cu n
+     * 
+     * @param n (unsigned) - numarul limita
+     * 
+     * @pre n - numar natural
+     * @post se afiseaza numerele care sunt palindroame mai mici sau egale ca n
+     */
+    for(int i = n; i >= 0; i--){
+        if(pali(i) == 1){
+            printf("%d ",i);
+        }
+    }
+}
+
 int main(){
     int running = 1;
     int com;
@@ -76,7 +112,7 @@ int main(){
     unsigned a;
     printf("Welcome to the Lab1 Homework!\n");
     while(running){
-        printf("Enter a command (1 - sqrt ; 2 - relative prime ; else - exit)\n>>>");
+        printf("Enter a command (1 - sqrt ; 2 - relative prime; 3 - palindrom ; else - exit)\n>>>");
         scanf("%d" , &com);
         if(com == 1){
             printf("Enter a real number and a precision(ex: 456 3)\n>>>");
@@ -86,10 +122,16 @@ int main(){
             printf("Enter a natural number\n>>>");
             scanf("%u" , &a);
             task_16(a);        
-        }else{
+        }else if(com == 3){
+            printf("Enter a natural number\n>>>");
+            scanf("%u" , &a);
+            task_lab(a);
+        }
+        else{
             running = 0;
         }
     }
+    
     printf("Have a nice day! =)\n");
     return 0;
 }
