@@ -1,11 +1,16 @@
 #include "UI.h"
 #include <string.h>
+#include <stdlib.h>
 
 void showCommands(){
     printf("1 - Print Participants\n");
     printf("2 - Add Participants\n");
     printf("3 - Delete Participants\n");
     printf("4 - Modify Participants\n");
+    printf("5 - Filt by score\n");
+    printf("6 - Filt by first letter\n");
+    printf("7 - Sort by score\n");
+    printf("8 - Sort by name\n");
     printf("0 - Exit\n");
 }
 
@@ -71,11 +76,12 @@ void startConsole(Lista *l){
             }
             else if(com == 3){
                 int id = 0;
-                while(id == 0){
+                int check = 0;
+                while(check == 0){
                     int c;
                     while((c = getchar()) != '\n' && c != EOF);
                     printf("Enter a id\n>>>");
-                    scanf("%d", &id);
+                    check = scanf("%d", &id);
                 }
                 int rez = Del_SRV(id,l);
                 if(rez == 1) printf("<<< Participand deleted >>>\n");
@@ -91,6 +97,91 @@ void startConsole(Lista *l){
                 int rez = Mod_SRV(id, scor, nume, prenume, l); 
                 if(rez == 1) printf("<<< Participand modified >>>\n");
                 else printf("<<< Failed to modify Participant(incorrect data) >>>\n");
+            }
+            else if(com == 5){
+                int len, scor = 0;
+                int check = 0;
+                while(check == 0){
+                    int c;
+                    while((c = getchar()) != '\n' && c != EOF);
+                    printf("Enter a Score\n>>>");
+                    check = scanf("%d", &scor);
+                }
+                Participant *p = filtrareScor(scor , l, &len);
+
+                printf("-----\n");
+                for(int i = 0; i < len; i++){
+                    printf("%d - %s %s: %d\n",p[i].id , p[i].Nume , p[i].Prenume, p[i].Scor);
+                }
+                if(len == 0){
+                    printf("The list is empty\n");
+                }
+                printf("-----\n");
+                free(p);
+            }else if(com == 6){
+                int len, check = 0;
+                char charc;
+                while(check == 0){
+                    int c;
+                    while((c = getchar()) != '\n' && c != EOF);
+                    printf("Enter a Letter\n>>>");
+                    check = scanf(" %c", &charc);
+                    if(charc < 'A' || charc > 'Z')
+                        check = 0;
+                }
+                Participant *p = filtrareLitera(charc , l, &len);
+
+                printf("-----\n");
+                for(int i = 0; i < len; i++){
+                    printf("%d - %s %s: %d\n",p[i].id , p[i].Nume , p[i].Prenume, p[i].Scor);
+                }
+                if(len == 0){
+                    printf("The list is empty\n");
+                }
+                printf("-----\n");
+                free(p);
+            }
+            else if(com == 7){
+                int dir = 0;
+                int check = 0;
+                while(check == 0){
+                    int c;
+                    while((c = getchar()) != '\n' && c != EOF);
+                    printf("Enter a direction(0 - ascending, descending otherwise)\n>>>");
+                    check = scanf("%d", &dir);
+                }
+                Participant *p = sortareScor(dir,l);
+
+                printf("-----\n");
+                for(int i = 0; i < l->len; i++){
+                    printf("%d - %s %s: %d\n",p[i].id , p[i].Nume , p[i].Prenume, p[i].Scor);
+                }
+                if(l->len == 0){
+                    printf("The list is empty\n");
+                }
+                printf("-----\n");
+                free(p);
+            }
+            else if(com == 8){
+                int dir = 0;
+                int check = 0;
+                while(check == 0){
+                    int c;
+                    while((c = getchar()) != '\n' && c != EOF);
+                    printf("Enter a direction(0 - ascending, descending otherwise)\n>>>");
+                    check = scanf("%d", &dir);
+                }
+                Participant *p = sortareNume(dir,l);
+
+                printf("-----\n");
+                for(int i = 0; i < l->len; i++){
+                    printf("%d - %s %s: %d\n",p[i].id , p[i].Nume , p[i].Prenume, p[i].Scor);
+                }
+                if(l->len == 0){
+                    printf("The list is empty\n");
+                }
+                printf("-----\n");
+                free(p);
             }
             else{
                 printf("Enter a valid command\n");
