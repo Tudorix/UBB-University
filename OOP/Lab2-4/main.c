@@ -4,10 +4,11 @@
 #include "Tets.h"
 
 int main(){
-    Lista listaParticipanti;
-    listaParticipanti.len = 0;
+    Lista *listaParticipanti;
+    listaParticipanti = makeList();
     
-    testAll(&listaParticipanti);
-    startConsole(&listaParticipanti);
+    testAll(listaParticipanti);
+    startConsole(listaParticipanti);
+    destroy(listaParticipanti);
     return 0;
 }

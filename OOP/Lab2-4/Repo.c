@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "Reop.h"
 
 void Add_REP(Participant p, Lista *l){
@@ -7,6 +8,9 @@ void Add_REP(Participant p, Lista *l){
      * @param p - Participantul de adaugat
      * @param l - Lista cu participanti
      */
+    if(l->len == l->capacitate){
+        resize(l);
+    }
     l->array[l->len].Scor = p.Scor; 
     l->array[l->len].id = p.id; 
     strcpy(l->array[l->len].Nume, p.Nume);
@@ -31,6 +35,10 @@ void Del_REP(int id, Lista *l){
         strcpy(l->array[j].Prenume,l->array[j + 1].Prenume);
     }
     l->len--;
+
+    if(l->len == l->capacitate / 2 && l->capacitate > 10){
+        desize(l);
+    }
 }
 
 void Mod_REP(int id, Participant p, Lista *l){

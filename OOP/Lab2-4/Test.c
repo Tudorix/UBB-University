@@ -62,6 +62,7 @@ void testFilt(Lista *l){
     assert(len == 2);
     assert(p[0].id == 6);
     assert(p[0].Scor == 70);
+    free(p);
 
     p = filtrareLitera('X',l,&len);
     assert(len == 0);
@@ -69,6 +70,7 @@ void testFilt(Lista *l){
     assert(len == 1);
     assert(p[0].id == 7);
     assert(p[0].Scor == 85);
+    free(p);
 }
 
 void testSortScor(Lista *l){
@@ -81,11 +83,14 @@ void testSortScor(Lista *l){
     assert(p[0].Scor == 70);
     assert(strcmp(p[0].Nume, "Bostan") == 0);
     assert(strcmp(p[0].Prenume, "Carol") == 0);
+    free(p);
+
     p = sortareScor(1,l);
     assert(p[0].id == 5);
     assert(p[0].Scor == 100);
     assert(strcmp(p[0].Nume, "Popescu") == 0);
     assert(strcmp(p[0].Prenume, "Marius") == 0);
+    free(p);
 }
 
 void testSortNume(Lista *l){
@@ -98,11 +103,29 @@ void testSortNume(Lista *l){
     assert(p[0].Scor == 98);
     assert(strcmp(p[0].Nume, "Ardelean") == 0);
     assert(strcmp(p[0].Prenume, "Gabriel") == 0);
+    free(p);
+
     p = sortareNume(1,l);
     assert(p[0].id == 5);
     assert(p[0].Scor == 100);
     assert(strcmp(p[0].Nume, "Popescu") == 0);
     assert(strcmp(p[0].Prenume, "Marius") == 0);
+    free(p);
+}
+
+void testAddDummies(Lista *l){
+    /**
+     * Functie care testeaza Adaugarea
+     */
+    Add_SRV(9,56, "Maria", "Andrei", l);
+    Add_SRV(10,87, "Ionescu", "Tudor", l);
+    Add_SRV(11, 95, "Mircea", "Antonia", l);
+    Add_SRV(12, 95, "Jors", "Casian", l);
+    Add_SRV(13, 100, "Popescu", "Marius", l);
+    Add_SRV(14, 70, "Bostan", "Carol", l);
+    Add_SRV(15, 85, "Kutasi", "Arpad", l);
+    Add_SRV(16, 95, "Valicu", "Aurel", l);
+    assert(l->capacitate == 20);
 }
 
 void testAll(Lista *l){
@@ -115,4 +138,5 @@ void testAll(Lista *l){
     testFilt(l);
     testSortScor(l);
     testSortNume(l);
+    testAddDummies(l);
 }
