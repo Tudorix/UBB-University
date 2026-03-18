@@ -12,6 +12,7 @@ void showCommands(){
     printf("7 - Sort by score\n");
     printf("8 - Sort by name\n");
     printf("9 - Find by name\n");
+    printf("10 - Swap to random pos\n");
     printf("0 - Exit\n");
 }
 
@@ -200,6 +201,13 @@ void startConsole(Lista *l){
                 }
                 printf("-----\n");
                 free(p);
+            }
+            else if(com == 10){
+                char c[30];
+                int len = 0;
+                printf("Enter a name or text to be searched:\n>>> ");
+                scanf("%s",c);
+                swapRandom(c,l);
             }
             else{
                 printf("Enter a valid command\n");

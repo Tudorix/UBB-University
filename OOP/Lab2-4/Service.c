@@ -2,6 +2,8 @@
 #include "Reop.h"
 #include "Valid.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 
 int Add_SRV(int id, int Scor, char *Nume, char *Prenume, Lista *l){
     /**
@@ -194,6 +196,59 @@ Participant* findByName(char *c, Lista *l, int *len){
     }
     *len = lenght;
     return out;
+}
+
+void swapRandom(char *c, Lista *l){
+    int lenght = 0;
+    Participant *out = malloc((l->len) * sizeof(Participant));
+    out = findByName(c,l,&lenght);
+    srand(time(NULL));
+    int random[lenght];
+    int stable[l->len - lenght];
+
+    int check = 0;
+    while(!check){
+        check = 1;
+        for(int i = 0; i < lenght; i++){
+            random[i] = rand() % l->len;
+        }
+
+        for(int i = 0; i < lenght - 1; i++){
+            for(int j = i + 1; j < lenght; j++){
+                if(random[i] == random[j]){
+                    check = 0;
+                    break;
+                }
+            }
+        }
+    }
+    
+    for(int i = 0; i < lenght; i++){
+        int index = 0;
+        for(int j = 0; j < l->len; j++){
+            if(out[i].id == l->array[j].id){
+                index = j;
+                break;
+            }
+        }
+
+        Participant aux;
+        aux.id = l->array[random[i]].id;
+        strcpy(aux.Nume,l->array[random[i]].Nume);
+        strcpy(aux.Prenume,l->array[random[i]].Prenume);
+        aux.Scor = l->array[random[i]].Scor;
+
+        l->array[random[i]].id = l->array[index].id;
+        strcpy(l->array[random[i]].Nume,l->array[index].Nume);
+        strcpy(l->array[random[i]].Prenume,l->array[index].Prenume);
+        l->array[random[i]].Scor = l->array[index].Scor;
+
+        l->array[index].id = aux.id;
+        strcpy(l->array[index].Nume,aux.Nume);
+        strcpy(l->array[index].Prenume,aux.Prenume);
+        l->array[index].Scor = aux.Scor;
+    }
+    free(out);
 }
 
 Participant* sortareNume(int dir, Lista *l){

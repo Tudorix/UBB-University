@@ -128,6 +128,15 @@ void testAddDummies(Lista *l){
     assert(l->capacitate == 20);
 }
 
+void testSwap(Lista *l){
+    /**
+     * Functie care testeaza swap
+     */
+    assert(l->len == 13);
+    swapRandom("T",l);
+    assert(l->len == 13);
+}
+
 void testFindByName(Lista *l){
     /**
      * Functie care testeaza cautarea dupa nume
@@ -162,5 +171,6 @@ void testAll(Lista *l){
     testSortScor(l);
     testSortNume(l);
     testAddDummies(l);
+    testSwap(l);
     testFindByName(l);
 }
