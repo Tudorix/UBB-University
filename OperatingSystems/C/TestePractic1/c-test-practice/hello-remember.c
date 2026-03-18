@@ -51,7 +51,14 @@ int main() {
     char name[64];
     struct node* head = NULL;
 
-    while(scanf("%s",name) == 1) {
+    while(fgets(name, 63,stdin) != NULL) {
+		if (strchr(name, '\n') == NULL) {
+        	// line was too long
+        	printf("Input too long!\n");
+			clear(head);
+			return 1;
+    	}
+
         if(known(head, name)) {
             printf("Still around %s, eh?\n", name);
         }

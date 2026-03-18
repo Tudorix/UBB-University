@@ -115,7 +115,7 @@ void testSortNume(Lista *l){
 
 void testAddDummies(Lista *l){
     /**
-     * Functie care testeaza Adaugarea
+     * Functie care testeaza resize
      */
     Add_SRV(9,56, "Maria", "Andrei", l);
     Add_SRV(10,87, "Ionescu", "Tudor", l);
@@ -126,6 +126,29 @@ void testAddDummies(Lista *l){
     Add_SRV(15, 85, "Kutasi", "Arpad", l);
     Add_SRV(16, 95, "Valicu", "Aurel", l);
     assert(l->capacitate == 20);
+}
+
+void testFindByName(Lista *l){
+    /**
+     * Functie care testeaza cautarea dupa nume
+     */
+    int len;
+    Participant *p;
+    p = findByName("Kutasi",l,&len);
+    assert(len == 2);
+    free(p);
+
+    p = findByName("a",l,&len);
+    assert(len == 12);
+    free(p);
+
+    p = findByName("pop",l,&len);
+    assert(len == 2);
+    free(p);
+
+    p = findByName("asian",l,&len);
+    assert(len == 2);
+    free(p);
 }
 
 void testAll(Lista *l){
@@ -139,4 +162,5 @@ void testAll(Lista *l){
     testSortScor(l);
     testSortNume(l);
     testAddDummies(l);
+    testFindByName(l);
 }

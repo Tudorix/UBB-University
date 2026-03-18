@@ -1,8 +1,0 @@
-Press i -> INSERT MODE
-Press ESC -> COMMAND MODE
-
-COMAND MODE:
-u - UNDO
-dd - DELETE LINE
-:X - SAVE and EXIT
-

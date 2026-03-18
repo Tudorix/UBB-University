@@ -11,6 +11,7 @@ void showCommands(){
     printf("6 - Filt by first letter\n");
     printf("7 - Sort by score\n");
     printf("8 - Sort by name\n");
+    printf("9 - Find by name\n");
     printf("0 - Exit\n");
 }
 
@@ -178,6 +179,23 @@ void startConsole(Lista *l){
                     printf("%d - %s %s: %d\n",p[i].id , p[i].Nume , p[i].Prenume, p[i].Scor);
                 }
                 if(l->len == 0){
+                    printf("The list is empty\n");
+                }
+                printf("-----\n");
+                free(p);
+            }
+            else if(com == 9){
+                char c[30];
+                int len = 0;
+                printf("Enter a name or text to be searched:\n>>> ");
+                scanf("%s",c);
+                Participant *p = findByName(c,l,&len);
+
+                printf("-----\n");
+                for(int i = 0; i < len; i++){
+                    printf("%d - %s %s: %d\n",p[i].id , p[i].Nume , p[i].Prenume, p[i].Scor);
+                }
+                if(len == 0){
                     printf("The list is empty\n");
                 }
                 printf("-----\n");

@@ -82,7 +82,7 @@ Participant* filtrareScor(int scor, Lista *l, int *len){
 
 Participant* filtrareLitera(char c, Lista *l, int *len){
     /**
-     * Functie care filtreaza Participanti dupa scor
+     * Functie care filtreaza Participanti dupa litera
      * 
      * @param scor - scorul dupa care se filtreaza
      * @param l - lista cu participanti
@@ -143,12 +143,67 @@ Participant* sortareScor(int dir, Lista *l){
     return out;
 }
 
+int checkName(char *c, char *g){
+    /**
+     * Functie care verifica daca un c este egal cu g sau daca c este subsir al lui g
+     * 
+     * @param c - sirul de verificat
+     * @param l - sirul de baza
+     * 
+     * @return - 1 daca este egal sau subsir, 0 altfel
+     */
+
+    char cc[strlen(c)];
+    char cg[strlen(g)];
+    strcpy(cc,c);
+    strcpy(cg,g);
+
+    for(int i = 0; i < strlen(c); i++){
+        if(cc[i] >= 'a' && cc[i] <= 'z'){
+            cc[i] -= 'a' - 'A';
+        }
+    }
+
+    for(int i = 0; i < strlen(g); i++){
+        if(cg[i] >= 'a' && cg[i] <= 'z'){
+            cg[i] -= 'a' - 'A';
+        }
+    }
+
+    if(strcmp(cg,cc) == 0) return 1;
+    if(strstr(cg,cc) != NULL) return 1;
+    return 0;
+}
+
+Participant* findByName(char *c, Lista *l, int *len){
+    /**
+     * Functie care gaseste un Participant dupa nume
+     * 
+     * @param c - numele pe care il cautam
+     * @param l - lista de participanti
+     * @param len - lungimea sirului de iesire
+     * 
+     * @return - pointer spre lista de cautati
+     */
+    int lenght = 0;
+    Participant *out = malloc((l->len) * sizeof(Participant));
+    for(int i = 0; i < l->len; i++){
+        if(checkName(c,l->array[i].Nume) == 1 || checkName(c,l->array[i].Prenume) == 1){
+            out[lenght++] = l->array[i];
+        }
+    }
+    *len = lenght;
+    return out;
+}
+
 Participant* sortareNume(int dir, Lista *l){
     /**
      * Functie care sorteaza Participanti dupa scor
      * 
      * @param l - lista cu participanti
      * @param dir - directia de sortare(crescator = 0 sau descrescator = altfel)
+     * 
+     * @return - pointer spre lista sortata
      */
     Participant aux;
     Participant *out = malloc((l->len) * sizeof(Participant));

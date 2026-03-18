@@ -19,44 +19,25 @@ permisiunile userului - grupului - other
 i.e.:
 -rw-rw-r-- 1 tudorix tudorix    42 mar  4 09:06 a.txt
 tip - fisier
-grupul(1) - tudorix
-ownerul(2) - tudorix
+owner(1) - tudorix
+
+u - owner
+g - grup
+o - other
+a - all
+
+r = 4
+w = 2
+x = 1
+
+faci suma
+
+----
+SUID
+SGID
+StuckyBit
+----
 
 chmod - schimbare de permisiuni a unui fisier
 - primeste un nr in baza 8 (abc - permisiunile)
-  
--la inceput de fisier bash #! /bin/bash - ruleaza cu bash (paote cu C , python, etc)
-
-$0 - numele comenzii
-$1 - primul argument
-$* - toate argumentele
-$@ - 
-$# - 
-
-shift 3 - shiftare argumente
-
---- FOR ---
-
-for A in lista_de_chestii; do
-	echo $A
-done
-
-lista_de_chestii -> valori, comanda shell
-
---- IF ---
-
-if test <ceva>; then
-	//ceva
-elif test <altceva>; then
-	//altceva
-else
-	//else
-fi
-
---- WHILE ---
-
-while <comnda>; do
-	//face ceva(sper)
-done
- 
 ```

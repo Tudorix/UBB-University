@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "Reop.h"
 
 void Add_REP(Participant p, Lista *l){

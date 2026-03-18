@@ -6,6 +6,7 @@
 
 ---Filtre---
 Grep , Sed , Awk - filtre linux
+sort | uniq
 
 #### GREP #####
 
@@ -15,6 +16,7 @@ Grep , Sed , Awk - filtre linux
 [^abc] - un singur caracter care NU e in paranteza
 [A-Z] - litera mare
 [a-z] - litera mica
+[a-zA-Z] - orice liteara
 [0-9] - cifra
 [^0-9] - nu e cifra
 \d - o cifra
@@ -52,6 +54,17 @@ In BRE toate caracterele speciale trebuie prefixate cu '\'
 -e - regular expression
 -f FILE - preia o expresie regualra din fisierul FILE
 
+-m 1 - prima aparitie
+-o - printeaza doar partea de match
+
+-A 2 - 2 linii deasupra(Above)
+-B 2 - 2 linii dedesupt(Below)
+
+##### AWK #####
+
+awk - pattern recognition
+awk -f<simbol> - pr dupa un simbol
+
 ##### SED #####
 
 -E - ERE mode
@@ -59,5 +72,22 @@ In BRE toate caracterele speciale trebuie prefixate cu '\'
 - are 2 buffere - cel de IO si bufferul lui de editare (dubleaza la printare in BRE)
   
 $p - ultima linie
+
+##### SORT #####
+
+sort - sorteaza alfabetic
+sort -n - numeric
+sort -r - reverse
+
+##### HEAD #####
+
+head -n 20 - primele 20 de intrari
+
+##### UNIQ #####
+
+uniq - elimina repetitile
+uniq -c - cate se repeta
+
+grep -E -i 'aeiou' -o | wc -l
 
 ```

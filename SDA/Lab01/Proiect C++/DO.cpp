@@ -6,45 +6,112 @@
 using namespace std;
 
 DO::DO(Relatie r) {
-	/* de adaugat */
+	this->capacitate = 10;
+	this->len = 0;
+	this->elems = new TElem[this->capacitate];
+	this->rel = r;
 }
 
 //adauga o pereche (cheie, valoare) in dictionar
 //daca exista deja cheia in dictionar, inlocuieste valoarea asociata cheii si returneaza vechea valoare
 //daca nu exista cheia, adauga perechea si returneaza null
 TValoare DO::adauga(TCheie c, TValoare v) {
-	/* de adaugat */
+	int index = -1;
+	for(int i = 0; i < this->len; i++){
+		if(this->elems[i].first == c){
+			index = i;
+			break;
+		}
+	}
+
+	if(index != -1){
+		TValoare old = this->elems[index].second;
+		this->elems[index].second = v;
+		return old;
+	}
+	
+	//Resize
+	if(this->len == this->capacitate){
+		this->capacitate *= 2;
+		TElem *e = new TElem[this->capacitate];
+		delete this->elems;
+		this->elems = e;
+	}
+
+	index = 0;
+	if(this->len > 0){
+		
+		for(int i = 0; i < this->len; i++){
+			if(this->elems[i].first > c){
+				index = i;
+				break;
+			}
+		}
+
+		for(int i = index; i < this->len; i++){
+			this->elems[i + 1] = this->elems[i];
+		}
+	}
+
+	this->elems[index].first = c;
+	this->elems[index].second = v;
+	this->len += 1;
+
 	return NULL_TVALOARE;
 }
 
 //cauta o cheie si returneaza valoarea asociata (daca dictionarul contine cheia) sau null
+// complexitate O(n)
 TValoare DO::cauta(TCheie c) const {
-	/* de adaugat */
+	for(int i = 0; i < this->len; i++){
+		if(this->elems[i].first == c){
+			return this->elems[i].second;
+		}
+	}
 	return NULL_TVALOARE;	
 }
 
 //sterge o cheie si returneaza valoarea asociata (daca exista) sau null
 TValoare DO::sterge(TCheie c) {
-	/* de adaugat */
+	TValoare rez;
+	if(this->len > 1){
+		for(int i = 0; i < this->len; i++){
+			if(this->elems[i].first == c){
+				rez = this->elems[i].second;
+			}
+		}
+
+		for(int i = 0; i < this->len - 1; i++){
+			this->elems[i] = this->elems[i + 1];
+		}
+
+		this->len -= 1;
+		return rez;
+	}else if(this->len == 1){
+		rez = this->elems[0].second;
+		this->len -= 1;
+		return rez;
+	}
 	return NULL_TVALOARE;
 }
 
 //returneaza numarul de perechi (cheie, valoare) din dictionar
 int DO::dim() const {
-	/* de adaugat */
-	return 0;
+	return this->len;
 }
 
 //verifica daca dictionarul e vid
 bool DO::vid() const {
-	/* de adaugat */
+	if(this->len > 0){
+		return false;
+	}
 	return true;
 }
 
 Iterator DO::iterator() const {
-	return  Iterator(*this);
+	return Iterator(*this);
 }
 
 DO::~DO() {
-	/* de adaugat */
+	delete this->elems;
 }

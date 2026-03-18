@@ -10,3 +10,4 @@ Participant* filtrareScor(int scor, Lista *l, int *len);
 Participant* filtrareLitera(char c, Lista *l, int *len);
 Participant* sortareScor(int dir, Lista *l);
 Participant* sortareNume(int dir, Lista *l);
+Participant* findByName(char *c, Lista *l, int *len);

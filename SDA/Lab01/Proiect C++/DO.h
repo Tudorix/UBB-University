@@ -15,7 +15,11 @@ typedef bool(*Relatie)(TCheie, TCheie);
 class DO {
 	friend class Iterator;
     private:
-	/* aici e reprezentarea */
+	
+	TElem *elems;
+	int capacitate;
+	int len;
+	Relatie rel;
 
     public:
 
