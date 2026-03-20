@@ -204,7 +204,6 @@ void swapRandom(char *c, Lista *l){
     out = findByName(c,l,&lenght);
     srand(time(NULL));
     int random[lenght];
-    int stable[l->len - lenght];
 
     int check = 0;
     while(!check){
