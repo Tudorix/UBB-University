@@ -16,13 +16,13 @@ int main() {
     cheltuieli.cap = 10;
 
     int rasp = test_all();
-    /*
+    
     if (rasp == 0) {
         printf("Testele a esuat\n");
     } else {
         meniu(&cheltuieli, s);
     }
-        */
+
     for(int i = 0; i < cheltuieli.len;i++){
         free(cheltuieli.cheltuieli[i].tip);
     }

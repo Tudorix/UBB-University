@@ -1,9 +1,48 @@
 #include "teste.h"
 #include "service.h"
+#include "stack.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+
+//##### L5
+void test_stack(){
+    Lista cheltuieli;
+    cheltuieli.cheltuieli = malloc(10 * sizeof(Cheltuiala));
+    cheltuieli.len = 0;
+    cheltuieli.cap = 10;
+
+    stack *s = initStack();
+
+    push(&cheltuieli,s);
+    adauga_cheltuiala(&cheltuieli, 10, 100, "mancare");
+    push(&cheltuieli,s);
+    adauga_cheltuiala(&cheltuieli, 10, 100, "mancare");
+    push(&cheltuieli,s);
+    adauga_cheltuiala(&cheltuieli, 10, 100, "mancare");
+    assert(s->len == 3);
+
+    push(&cheltuieli,s);
+    sterge_cheltuiala(&cheltuieli,1);
+    assert(s->len == 4);
+
+    pop(s);
+    pop(s);
+    assert(s->len == 2);
+
+    pop(s);
+    pop(s);
+    pop(s);
+    assert(s->len == 0);
+
+    //Free memory
+    for(int i = 0; i < cheltuieli.len;i++){
+        free(cheltuieli.cheltuieli[i].tip);
+    }
+    free(cheltuieli.cheltuieli);
+    destroy(s);
+}
 
 int test_adauga_cheltuiala() {
     Lista cheltuieli;
@@ -174,7 +213,7 @@ int test_filt_dupa_zi() {
     assert(len == 0);
     free(sortate);
 
-    Cheltuiala* sortate = filtarare_dupa_zi(&cheltuieli, 10, &len);
+    sortate = filtarare_dupa_zi(&cheltuieli, 10, &len);
     assert(len == 1);
     free(sortate);
 
@@ -278,5 +317,6 @@ int test_all() {
     
     //###### L5
     test_filt_dupa_zi();
+    test_stack();
     return 1;
 }
