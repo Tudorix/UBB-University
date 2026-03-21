@@ -4,23 +4,24 @@
 using namespace std;
 
 Iterator::Iterator(const DO& d) : dict(d){
-	/* de adaugat */
+	this->curent = 0;
 }
 
 void Iterator::prim(){
-	/* de adaugat */
+	this->curent = 0;
 }
 
 void Iterator::urmator(){
-	/* de adaugat */
+	this->curent += 1;
 }
 
 bool Iterator::valid() const{
-	/* de adaugat */
-	return false;
+	return this->curent < dict.dim();
 }
 
 TElem Iterator::element() const{
-	/* de adaugat */
+	if(valid()){
+		return this->dict.elems[curent];
+	}
 	return pair <TCheie, TValoare>  (-1, -1);
 }

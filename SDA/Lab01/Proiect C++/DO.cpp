@@ -5,6 +5,7 @@
 #include <exception>
 using namespace std;
 
+// Theta(1)
 DO::DO(Relatie r) {
 	this->capacitate = 10;
 	this->len = 0;
@@ -34,23 +35,25 @@ TValoare DO::adauga(TCheie c, TValoare v) {
 	if(this->len == this->capacitate){
 		this->capacitate *= 2;
 		TElem *e = new TElem[this->capacitate];
-		delete this->elems;
+
+		for(int i = 0; i < this->len; i++){
+			e[i] = this->elems[i];
+		}
+
+		delete[] this->elems;
 		this->elems = e;
 	}
 
-	index = 0;
-	if(this->len > 0){
-		
-		for(int i = 0; i < this->len; i++){
-			if(this->elems[i].first > c){
-				index = i;
-				break;
-			}
+	index = this->len;
+	for(int i = 0; i < this->len; i++){
+		if(!this->rel(this->elems[i].first,c)){
+			index = i;
+			break;
 		}
+	}
 
-		for(int i = index; i < this->len; i++){
-			this->elems[i + 1] = this->elems[i];
-		}
+	for(int i = this->len; i > index; i--){
+		this->elems[i] = this->elems[i - 1];
 	}
 
 	this->elems[index].first = c;
@@ -73,34 +76,37 @@ TValoare DO::cauta(TCheie c) const {
 
 //sterge o cheie si returneaza valoarea asociata (daca exista) sau null
 TValoare DO::sterge(TCheie c) {
-	TValoare rez;
-	if(this->len > 1){
-		for(int i = 0; i < this->len; i++){
-			if(this->elems[i].first == c){
-				rez = this->elems[i].second;
-			}
-		}
+	 int poz = -1;
 
-		for(int i = 0; i < this->len - 1; i++){
-			this->elems[i] = this->elems[i + 1];
-		}
+    for (int i = 0; i < this->len; i++) {
+        if (this->elems[i].first == c) {
+            poz = i;
+            break;
+        }
+    }
 
-		this->len -= 1;
-		return rez;
-	}else if(this->len == 1){
-		rez = this->elems[0].second;
-		this->len -= 1;
-		return rez;
-	}
-	return NULL_TVALOARE;
+    if (poz == -1) {
+        return NULL_TVALOARE;
+    }
+
+    TValoare rez = this->elems[poz].second;
+
+    for (int i = poz; i < this->len - 1; i++) {
+        this->elems[i] = this->elems[i + 1];
+    }
+
+    this->len--;
+    return rez;
 }
 
 //returneaza numarul de perechi (cheie, valoare) din dictionar
+// Theta(1)
 int DO::dim() const {
 	return this->len;
 }
 
 //verifica daca dictionarul e vid
+// Theta(1)
 bool DO::vid() const {
 	if(this->len > 0){
 		return false;
@@ -108,10 +114,12 @@ bool DO::vid() const {
 	return true;
 }
 
+// Theta(1)
 Iterator DO::iterator() const {
 	return Iterator(*this);
 }
 
+// Theta(1)
 DO::~DO() {
 	delete this->elems;
 }

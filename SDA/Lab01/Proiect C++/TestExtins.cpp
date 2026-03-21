@@ -5,7 +5,8 @@
 #include "Iterator.h"
 #include "DO.h"
 #include "TestExtins.h"
-using namespace std;
+
+using namespace std;
 
 bool cresc(TCheie c1, TCheie c2) {
 	if (c1 <= c2) {
@@ -117,6 +118,7 @@ void testAdaugaSiCauta(Relatie r) {
 	for (int c = cMin; c <= cMax; c++) {
 		assert(d.cauta(c) == c);
 	}
+	
 	assert(d.dim() == (cMax - cMin + 1));
 
 	rePopuleazaDOSh(d, cMin, cMax, 1);
@@ -142,6 +144,7 @@ void testAdaugaSiCauta(Relatie r) {
 			it.urmator();
 		}
 	}
+	
 
 }
 
@@ -236,7 +239,7 @@ void testCantitativ(){
 	vector<int> chei  = cheiInOrdineAleatoare(cMin, cMax);
     populeazaDOVidIdentic(d, cMin, cMax);
     for (int c = cMin; c <= cMax; c++){
-      	assert(d.cauta(c) == c);
+    	assert(d.cauta(c) == c);
     }
     assert(d.dim() == cMax - cMin + 1);
     Iterator it  = d.iterator();
@@ -257,8 +260,8 @@ void testCantitativ(){
     }
     assert(!it.valid());
     for (int c = cMin-100; c <= cMax+100; c++){
-         d.sterge(c);
-         assert(d.cauta(c) == NULL_TVALOARE);
+        d.sterge(c);
+        assert(d.cauta(c) == NULL_TVALOARE);
     }
     assert(d.dim() == 0);
     assert(d.vid());
