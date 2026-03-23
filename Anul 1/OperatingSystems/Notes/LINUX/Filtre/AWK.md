@@ -32,4 +32,13 @@ awk -F: '$NF ~ /nologin$/  {print $1}' /etc/passwd
 awk -F: 'length($1)>10 {print $5}' /etc/passwd
 
 	NR - indexare de la 1
+	
+
+awk '{print NR, $0}' angajati.txt 
+
+awk '{print NR, $0}' angajati.txt 
+
+awk 'length($0) > 42 {print NR,$0}' angajati.txt 
+
+
 ```

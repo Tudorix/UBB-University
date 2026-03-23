@@ -18,7 +18,20 @@ sed -n '/Tudor/p' anagajati.txt - liniile pe care apare 'Tudor'
 sed -E "/regex/d" a.txt - stergere la toate liniile
 sed -E "y/characters/replacement/" a.txt - map replacement
 
+sed -n 'w angajati.bak' angajati.txt 
+
+sed '$ a TERMINAT' angajati.txt 
+
+sed '2 c SALARIAT PENSIONAT' angajati.txt 
+
+sed '3 r text.txt' angajati.txt 
+
+sed '3 a Linie Adaugata' angajati.txt 
+sed '/Adrian/a Despot!!' angajati.txt 
+
 sed -E "s/regex/replacement/flags" a.txt - inlocuieste regex uri
+
+\t = tab
 
 	The flags at the end can be g, i, or both
 	1. g - Perform the replacement everywhere on the line. Without it, only the first appearance

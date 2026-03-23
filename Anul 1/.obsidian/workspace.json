@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OperatingSystems/Study.md",
+                "file": "OperatingSystems/Notes/LINUX/Filtre/AWK.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Study"
+              "title": "AWK"
             }
           }
         ],
@@ -198,11 +198,12 @@
       "bases:Create new base": false
     }
   },
-  "active": "694b1aee01aaedfc",
+  "active": "e865732f7fe74fa5",
   "lastOpenFiles": [
+    "OperatingSystems/Notes/LINUX/Filtre/SED.md",
+    "OperatingSystems/Study.md",
     "OperatingSystems/STUD",
     "OperatingSystems/Notes/Race Condition.md",
-    "OperatingSystems/Study.md",
     "OperatingSystems/Notes/COMENZI.md",
     "OperatingSystems/Notes/VIM.md",
     "OperatingSystems/Notes/Cursuri.md",
@@ -210,7 +211,6 @@
     "OperatingSystems/Notes/LINUX/TEST  & CHMOD (curs02).md",
     "OperatingSystems/Notes/LINUX/PROCESE.md",
     "OperatingSystems/Notes/LINUX/Filtre/GREP.md",
-    "OperatingSystems/Notes/LINUX/Filtre/SED.md",
     "Fundamentele Programarii/Semniare/Seminar 5.md",
     "Fundamentele Programarii/Semniare/Seminar 2.md",
     "OperatingSystems/Notes/LINUX/Filtre/AWK.md",

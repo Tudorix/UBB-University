@@ -17,11 +17,20 @@ DO::DO(Relatie r) {
 //daca exista deja cheia in dictionar, inlocuieste valoarea asociata cheii si returneaza vechea valoare
 //daca nu exista cheia, adauga perechea si returneaza null
 TValoare DO::adauga(TCheie c, TValoare v) {
+	//O(log(n))
 	int index = -1;
-	for(int i = 0; i < this->len; i++){
-		if(this->elems[i].first == c){
-			index = i;
+	int a = 0; int b = this->len - 1;
+	while(a <= b){
+		int m = (b + a) / 2;
+
+		TElem x = this->elems[m];
+		if(x.first == c){
+			index = m;
 			break;
+		}else if(!this->rel(x.first,c)){
+			b = m - 1;
+		}else{
+			a = m + 1;
 		}
 	}
 
@@ -32,6 +41,7 @@ TValoare DO::adauga(TCheie c, TValoare v) {
 	}
 	
 	//Resize
+	// Theta(n)
 	if(this->len == this->capacitate){
 		this->capacitate *= 2;
 		TElem *e = new TElem[this->capacitate];
@@ -44,14 +54,22 @@ TValoare DO::adauga(TCheie c, TValoare v) {
 		this->elems = e;
 	}
 
+	// Theta(log(n))
 	index = this->len;
-	for(int i = 0; i < this->len; i++){
-		if(!this->rel(this->elems[i].first,c)){
-			index = i;
-			break;
+	a = 0; b = this->len - 1;
+	while(a <= b){
+		int m = (b + a) / 2;
+
+		TElem x = this->elems[m];
+		if(this->rel(x.first,c)){
+			a = m + 1;
+		}else{
+			index = m;
+			b = m - 1;
 		}
 	}
 
+	// Theta(n)
 	for(int i = this->len; i > index; i--){
 		this->elems[i] = this->elems[i - 1];
 	}
@@ -64,11 +82,19 @@ TValoare DO::adauga(TCheie c, TValoare v) {
 }
 
 //cauta o cheie si returneaza valoarea asociata (daca dictionarul contine cheia) sau null
-// complexitate O(n)
+// complexitate O(log(n))
 TValoare DO::cauta(TCheie c) const {
-	for(int i = 0; i < this->len; i++){
-		if(this->elems[i].first == c){
-			return this->elems[i].second;
+	int a = 0; int b = this->len - 1;
+	while(a <= b){
+		int m = (b + a) / 2;
+
+		TElem x = this->elems[m];
+		if(x.first == c){
+			return x.second;
+		}else if(!this->rel(x.first,c)){
+			b = m - 1;
+		}else{
+			a = m + 1;
 		}
 	}
 	return NULL_TVALOARE;	
