@@ -42,6 +42,15 @@ while <comnda>; do
 	//face ceva(sper)
 done
  
- 
 expr pt numere
+
+==== Lab5 ====
+
+return value / status code:
+0 - success
+1 - fail
+
+test -z "abc" - verif daca e gol
+
+
 ```

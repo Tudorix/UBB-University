@@ -16,6 +16,8 @@ DO::DO(Relatie r) {
 //adauga o pereche (cheie, valoare) in dictionar
 //daca exista deja cheia in dictionar, inlocuieste valoarea asociata cheii si returneaza vechea valoare
 //daca nu exista cheia, adauga perechea si returneaza null
+
+//Theta(n)
 TValoare DO::adauga(TCheie c, TValoare v) {
 	//O(log(n))
 	int index = -1;
@@ -41,7 +43,7 @@ TValoare DO::adauga(TCheie c, TValoare v) {
 	}
 	
 	//Resize
-	// Theta(n)
+	// Theta(1) - amortizat
 	if(this->len == this->capacitate){
 		this->capacitate *= 2;
 		TElem *e = new TElem[this->capacitate];
@@ -101,15 +103,26 @@ TValoare DO::cauta(TCheie c) const {
 }
 
 //sterge o cheie si returneaza valoarea asociata (daca exista) sau null
+//Theta(n)
 TValoare DO::sterge(TCheie c) {
-	 int poz = -1;
+	// O(log(n))
+	int poz = -1;
+	int a = 0; int b = this->len - 1;
+	while(a <= b){
+		int m = (a + b) / 2;
 
-    for (int i = 0; i < this->len; i++) {
-        if (this->elems[i].first == c) {
-            poz = i;
-            break;
-        }
-    }
+		TElem x = this->elems[m];
+		if(x.first == c){
+			poz = m;
+			break;
+		}
+
+		if(!this->rel(x.first, c)){
+			b = m - 1;
+		}else{
+			a = m + 1;
+		}
+	} 
 
     if (poz == -1) {
         return NULL_TVALOARE;
@@ -117,6 +130,7 @@ TValoare DO::sterge(TCheie c) {
 
     TValoare rez = this->elems[poz].second;
 
+	//Theta(n)
     for (int i = poz; i < this->len - 1; i++) {
         this->elems[i] = this->elems[i + 1];
     }
