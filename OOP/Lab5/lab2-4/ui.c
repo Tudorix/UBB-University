@@ -17,18 +17,6 @@ void printStack(stack *s){
 }
 
 int meniu(Lista* cheltuieli, stack* s) {
-    push(cheltuieli,s);
-    adauga_cheltuiala(cheltuieli, 10, 20, "mancare");
-    push(cheltuieli,s);
-    adauga_cheltuiala(cheltuieli, 10, 20, "mancare");
-    push(cheltuieli,s);
-    adauga_cheltuiala(cheltuieli, 10, 20, "mancare");
-    push(cheltuieli,s);
-    adauga_cheltuiala(cheltuieli, 10, 20, "mancare");
-    push(cheltuieli,s);
-    adauga_cheltuiala(cheltuieli, 10, 20, "mancare");
-    push(cheltuieli,s);
-    adauga_cheltuiala(cheltuieli, 10, 20, "mancare");
 
     while (1) {
         printf("Gestiunea bugetului\n\n");
@@ -62,8 +50,6 @@ int meniu(Lista* cheltuieli, stack* s) {
             int res = adauga_cheltuiala(cheltuieli, zi, suma, tip);
             if (res == 0) {
                 printf("A aparut o eroare la adaugare\n\n");
-                pop(s);
-                
             }
             printStack(s);
         } else if (opt == '2') {
@@ -196,10 +182,9 @@ int meniu(Lista* cheltuieli, stack* s) {
         }
         else if (opt == '9') {
             if(cheltuieli->len > 0){
-                printStack(s);
 
                 for(int i = 0; i < cheltuieli->len;i++){
-                    printf("%d ",cheltuieli->cheltuieli[i].id);
+                    printf("%d %d %d %s",cheltuieli->cheltuieli[i].id, cheltuieli->cheltuieli[i].zi, cheltuieli->cheltuieli[i].suma, cheltuieli->cheltuieli[i].tip);
                 }
                 printf("\n");
             }else{

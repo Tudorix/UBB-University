@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if ! [ -d $1 ]; then
+	echo "Not a dir"
+	exit 1
+fi
+
+for FILE in `ls $1`; do
+	if [ -f $FILE ]; then
+		check=`grep -E '[0-9]{5,}' $FILE | wc -l `
+		if [ $check -gt 0 ]; then
+			echo $FILE
+    	fi
+	fi
+done

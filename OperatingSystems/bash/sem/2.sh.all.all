@@ -1,0 +1,18 @@
+#!/bin/bash
+
+for P in `ls`; do
+	if [ -f $P ]; then
+		echo "File name: $P"
+		LINE_NR=`grep -E "*" -c $P`
+		echo "Line Nr $LINE_NR"
+		CHAR_NR=`cat $P | grep -E '.' -o | grep '.' -c `
+		echo "Char Nr $CHAR_NR"
+	fi
+
+	if [ -d $P ]; then
+		echo "Dir name $P"
+		count=`find $P -type f | wc -l`
+		echo $count
+	fi
+
+done

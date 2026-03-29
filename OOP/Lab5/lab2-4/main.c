@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "lista.h"
 #include "stack.h"
+#include "repo.h"
 
 int main() {
 
@@ -17,11 +18,15 @@ int main() {
 
     int rasp = test_all();
     
+    load(&cheltuieli,s,"/home/tudorix/UBB/UBB-University/OOP/Lab5/save.txt");
+
     if (rasp == 0) {
         printf("Testele a esuat\n");
     } else {
         meniu(&cheltuieli, s);
     }
+
+    save(&cheltuieli,"/home/tudorix/UBB/UBB-University/OOP/Lab5/save.txt");
 
     for(int i = 0; i < cheltuieli.len;i++){
         free(cheltuieli.cheltuieli[i].tip);

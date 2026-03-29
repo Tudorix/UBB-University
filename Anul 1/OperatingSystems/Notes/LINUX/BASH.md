@@ -13,8 +13,12 @@ $0 - numele comenzii
 $1 - primul argument
 $* - toate argumentele
 $@ - lista argumente
-$# - lista argumente
+$# - nr de argumente
 $? - exit code
+
+wc -c filename -> characters
+wc -l filename -> lines
+wc -w filename -> words
 
 shift 3 - shiftare argumente
 
@@ -51,6 +55,7 @@ return value / status code:
 1 - fail
 
 test -z "abc" - verif daca e gol
+
 
 
 ```

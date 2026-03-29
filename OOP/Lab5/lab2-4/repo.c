@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lista.h"
+#include <stdio.h>
+#include <unistd.h>
+#include "stack.h"
 
 /**
 Operatiune de resize pentru lista dinamica.
@@ -90,4 +93,63 @@ void sterge_cheltuiala_repo(Lista* cheltuieli, int id)
             cheltuieli->len--;
         }
     }
+}
+
+void load(Lista* l, stack *s, char* filename){
+    FILE * fp;
+    char * line = NULL;
+    size_t len = 100;
+    ssize_t read;
+
+    fp = fopen(filename, "r");
+    if (fp == NULL){
+        printf("Error");
+        exit(1);
+    }
+
+    while ((read = getline(&line, &len, fp)) != -1) {
+        char *p = strtok(line, ",");
+        int k = 0;
+        int suma,data;
+        char tip[25];
+        for(int i = 1; i <= 3; i++){
+            if(i == 1){
+                data = atoi(p);
+            }
+            if(i == 2){
+                suma = atoi(p);
+            }
+            if(i == 3){
+                strcpy(tip,p);
+            }
+            p=strtok(NULL,",");
+        }
+
+        push(l,s);
+        adauga_cheltuiala_repo(l,data,suma,tip);
+    }
+
+    fclose(fp);
+    if (line)
+        free(line);
+}
+
+void save(Lista* l, char* filename){
+    FILE * fp;
+
+    fp = fopen(filename, "w");
+    if (fp == NULL){
+        printf("Error");
+        exit(1);
+    }
+
+    for(int i = 0; i < l->len;i++){
+        fprintf(fp,"%d",l->cheltuieli[i].zi);
+        fprintf(fp,",");
+        fprintf(fp,"%d",l->cheltuieli[i].suma);
+        fprintf(fp,",");
+        fprintf(fp,"%s",l->cheltuieli[i].tip);
+    }
+
+    fclose(fp);
 }

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if ! [ -d $1 ]; then
+	echo "Not a dir"
+	exit 1
+fi
+
+count=0
+nr=0
+for F in `find $1 *.txt`; do
+	echo $F
+	nr=`expr $nr + 1`
+	cf=`cat $F | wc -l`
+	count=`expr $count + $cf`
+done
+
+echo $count
+echo $nr
+echo `expr $count / $nr`

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+for F in `ls`; do
+	if [ -f $F  ]; then
+		lines=`wc -l < $F`
+		if [ $lines -le 10  ] ; then
+			cat "$F"
+		else
+			head -n 5 "$F"
+			tail -n 5 "$F"
+		fi
+
+	fi
+done
