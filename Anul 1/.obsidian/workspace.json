@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OperatingSystems/Notes/C/EXEC.md",
+                "file": "OperatingSystems/Notes/LINUX/BASH.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "EXEC"
+              "title": "BASH"
             }
           }
         ],
@@ -212,13 +212,13 @@
       "bases:Create new base": false
     }
   },
-  "active": "694b1aee01aaedfc",
+  "active": "4835e33943c0c6b4",
   "lastOpenFiles": [
-    "OperatingSystems/Notes/LINUX/BASH.md",
+    "OperatingSystems/Notes/LINUX/Filtre/AWK.md",
     "OperatingSystems/Notes/C/EXEC.md",
+    "OperatingSystems/Notes/LINUX/BASH.md",
     "OperatingSystems/Main.md",
     "OperatingSystems/Notes/LINUX/Filtre/GREP.md",
-    "OperatingSystems/Notes/LINUX/Filtre/AWK.md",
     "OperatingSystems/Notes/LINUX/Filtre/SED.md",
     "OperatingSystems/Study.md",
     "OperatingSystems/STUD",

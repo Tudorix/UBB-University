@@ -44,7 +44,7 @@ fi
 
 while <comnda>; do
 	//face ceva(sper)
-done
+done < wc -l
  
 expr pt numere
 
@@ -56,6 +56,19 @@ return value / status code:
 
 test -z "abc" - verif daca e gol
 
+Sem 3
 
+echo ${#NUME} -> nr de charactere din NUME
+echo ${NUME:0:3} -> substringul de la 0 de lungime 3
+
+$((expr_aritmetica))
+
+$(seq 0 10) - secventa de la 0 la 10
+
+while read LINE; do
+
+done < "$FISIER" -> citire linie cu linie
+
+read -r -> nu interpreteaza \
 
 ```

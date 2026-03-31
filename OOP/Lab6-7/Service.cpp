@@ -68,9 +68,7 @@ vector<Produs> Service::filter(int mode, char field[30]){
                 }
                 break;
             }
-        
-        default:
-            break;
+    
         }
     }
     return out;
@@ -164,9 +162,6 @@ vector<Produs> Service::sort(int mode, int dir){
                     }
                     break;
                 }
-            
-            default:
-                break;
             }
         }
     }while(check);
@@ -230,7 +225,7 @@ void Service::modService(int id,int pret, char nume[30], char tip[30], char prod
     try{
         this->delService(id);
         this->addService(pret,nume,tip,producator,id);
-    }catch (int e){
+    }catch (const char* e){
         throw "Error in modify : There is no Produs with that ID in the list";
     }
 }
