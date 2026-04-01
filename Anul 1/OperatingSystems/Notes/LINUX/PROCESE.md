@@ -16,4 +16,9 @@ xxd - hex format
 !!! '[' -  e o comada, necesita spatiu si inainte si dupa
 
 "$X" - se asigura ca o variabile vida nu da eraore
+
+man 2 open -> flagrile pt open - O_NDELAY
+
+ipcmk - memorie partajata
+ipcs 
 ```

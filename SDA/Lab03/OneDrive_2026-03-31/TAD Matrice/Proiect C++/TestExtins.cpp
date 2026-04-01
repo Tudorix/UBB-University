@@ -63,7 +63,8 @@ void testQuantity() {//scopul e sa adaugam multe date
 	            if (v2%3==0)
 			m.modifica(i, v2, i+v2);
 	   }
-	}		
+	}
+			
 	for(int i=0; i<m.nrLinii(); i++)
            for(int j=0; j<m.nrColoane(); j++)
 		if (i%2==0 && j%2==0)
@@ -72,6 +73,7 @@ void testQuantity() {//scopul e sa adaugam multe date
 	            if (j%3==0)
 			 assert(m.element(i,j) == i+j);
 				else assert(m.element(i,j) == 0);
+	
 }
 
 void testExceptii() {
