@@ -1,5 +1,4 @@
 #include "UI.h"
-#include <bits/stdc++.h>
 
 UI::UI(Service *srv){
     this->service = srv;
@@ -46,6 +45,11 @@ void UI::run(){
         cout << "5 - Find\n";
         cout << "6 - Filter\n";
         cout << "7 - Sort\n";
+        cout << "8 - Raport\n";
+        cout << "Wishlist:\n";
+        cout << "9 - Empty\n";
+        cout << "10 - Print Wishlist\n";
+        cout << "11 - Add item to wishlist\n";
         cout << "0 - Exit\n";
         cout << "Enter a command : \n>>>";
         cin.getline(com, 30);
@@ -66,7 +70,6 @@ void UI::run(){
             readString("nume",nume);
             readString("tip",tip);
             readString("producator",producator);
-
             this->service->addService(pret,nume,tip,producator);
         }
         if(strcmp(com, "3") == 0){
@@ -75,8 +78,8 @@ void UI::run(){
             try{
                 this->service->delService(id);
                 cout << "Produs deleted successfully!\n";
-            }catch (const char* e){
-                cout << "Task unsuccessful : " << e << "\n";
+            }catch (const Except& e){
+                cout << "Task unsuccessful : " << e.what() << "\n";
             }
         }
         if(strcmp(com, "4") == 0){
@@ -93,8 +96,8 @@ void UI::run(){
             try{
                 this->service->modService(id,pret,nume,tip,producator);
                 cout << "Produs modified successfully!\n";
-            }catch (const char* e){
-                cout << "Task unsuccessful : " << e << "\n";
+            }catch (const Except& e){
+                cout << "Task unsuccessful : " << e.what() << "\n";
             }
         }
         if(strcmp(com, "5") == 0){
@@ -122,7 +125,9 @@ void UI::run(){
                     for(long unsigned int i = 0; i < out.size(); i++){
                         out[i].afiseaza();
                     }
-                }catch(int e){}
+                }catch (const Except& e){
+                    cout << "Task unsuccessful : " << e.what() << "\n";
+                }
             }else{
                 cout << "Invalid mode! \n";
             }
@@ -143,14 +148,63 @@ void UI::run(){
                     for(long unsigned int i = 0; i < out.size(); i++){
                         out[i].afiseaza();
                     }
-                }catch(int e){}
+                }catch (const Except& e){
+                    cout << "Task unsuccessful : " << e.what() << "\n";
+                }   
             }else{
                 cout << "Invalid mode! \n";
             }
             cout << "\n";
         }
+        if(strcmp(com, "8") == 0){
+            cout << "1 - Nume\n";
+            cout << "2 - Tip\n";
+            cout << "3 - Producator\n";
+            int mode;
+            mode = readNum("mode");
+            if(mode >= 1 && mode <= 3){
+                char criteria[30];
+                try{
+                    readString("criteria", criteria);
+                    float percentage = this->service->raport(mode,criteria);
+                    cout << percentage << " - \n";
+                    percentage *= 100;
+                    cout << " ---- Graphic ---- \n\n";
+                    for(int i = 0; i < percentage; i++){
+                        cout << "#";
+                    }
+                    cout << " = "<< percentage << "%  -> " << criteria << "\n\n";
+                    for(int i = percentage + 1; i <= 100; i++){
+                        cout << "#";
+                    }
+                    cout << " = "<< 100 - percentage << "%   -> other\n\n";
+                }catch (const Except& e){
+                    cout << "Task unsuccessful : " << e.what() << "\n";
+                }
+            }else{
+                cout << "Invalid mode! \n";
+            }
+        }
+        if(strcmp(com, "9") == 0){
+            this->service->empty();
+        }
+        if(strcmp(com, "10") == 0){
+            vector<Produs> out;
+            out = this->service->getWish();
+            for(long unsigned int i = 0; i < out.size(); i++){
+                out[i].afiseaza();
+            }
+        }
+        if(strcmp(com, "11") == 0){
+            int id = readNum("ID");
+            try{
+                this->service->addWish(id);
+            }catch(const Except &e){
+                cout << "Task unsuccessful : " << e.what() << "\n";
+            }
+        }
         if(strcmp(com, "0") == 0){
-            cout << "Goodbye!";
+            cout << "Goodbye!\n";
             running = false;
         }
     }

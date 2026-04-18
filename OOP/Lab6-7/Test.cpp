@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include <vector>
+#include <bits/stdc++.h>
 #include "Service.h"
 #include "Repo.h"
 #include "Valid.h"
@@ -162,9 +162,12 @@ void testSort(Service *s){
 
 int main(){
     vector<Produs> lista;
+    vector<Produs> wishlist;
+
+    Wishlist wish(wishlist);
     Repo repo(lista);
     Valid valid;
-    Service srv(&repo,valid);
+    Service srv(&repo,valid,&wish);
 
     // Run Tests
     testExtCase(&srv);
@@ -175,6 +178,6 @@ int main(){
     testFilter(&srv);
     testSort(&srv);
 
-    cout << "Finished Tests!";
+    cout << "Finished Tests!\n";
     return 0;
 }

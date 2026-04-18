@@ -1,0 +1,27 @@
+total 96
+-rw-rw-r-- 1 tudorix tudorix    0 apr  5 19:50 1
+-rwxrwxr-x 1 tudorix tudorix   75 apr  5 17:01 10.sh
+-rwxrwxr-x 1 tudorix tudorix  139 apr  5 17:30 11.sh
+-rwxrwxr-x 1 tudorix tudorix  147 apr  5 17:35 12.sh
+-rwxrwxr-x 1 tudorix tudorix  105 apr  5 17:39 13.sh
+-rwxrwxr-x 1 tudorix tudorix  135 apr  5 17:54 15.sh
+-rwxrwxr-x 1 tudorix tudorix  122 apr  5 18:06 16.sh
+-rwxrwxr-x 1 tudorix tudorix  129 apr  5 19:22 17.sh
+-rwxrwxr-x 1 tudorix tudorix  189 apr  5 19:43 18.sh
+-rw-rw-r-- 1 tudorix tudorix    0 apr  5 19:43 19.sh
+-rwxrwxr-x 1 tudorix tudorix   47 apr  5 15:46 1.sh
+-rwxrwxr-x 1 tudorix tudorix  303 apr  5 19:52 20.sh
+-rwxrwxr-x 1 tudorix tudorix  265 apr  6 12:10 22.sh
+-rwxrwxr-x 1 tudorix tudorix  290 apr  6 12:37 23.sh
+-rwxrwxr-x 1 tudorix tudorix  166 apr  6 13:15 24.sh
+-rwxrwxr-x 1 tudorix tudorix  160 apr  6 13:19 25.sh
+-rwxrwxr-x 1 tudorix tudorix  222 apr  5 15:56 2.sh
+-rwxrwxr-x 1 tudorix tudorix  256 apr  5 15:58 3.sh
+-rwxrwxr-x 1 tudorix tudorix  190 apr  5 16:04 4.sh
+-rwxrwxr-x 1 tudorix tudorix   88 apr  5 16:06 5.sh
+-rwxrwxr-x 1 tudorix tudorix   79 apr  5 16:39 6.sh
+-rwxrwxr-x 1 tudorix tudorix  139 apr  5 16:41 7.sh
+-rwxrwxr-x 1 tudorix tudorix  204 apr  5 16:50 8.sh
+-rwxrwxr-x 1 tudorix tudorix  208 apr  5 16:57 9.sh
+drwx------ 6 tudorix tudorix 4096 apr  6 13:19 dir
+-rwxrwxr-x 1 tudorix tudorix   21 apr  6 12:37 text.txt

@@ -1,6 +1,6 @@
 #include "Service.h"
 
-Service::Service (Repo *repo, Valid valid){
+Service::Service (Repo *repo, Valid valid, Wishlist *wishlist){
     /**
     * Constructor pentru Service
     * 
@@ -9,7 +9,35 @@ Service::Service (Repo *repo, Valid valid){
     */
     this->repo = repo;
     this->valid = valid;
+    this->wish = wishlist;
 }
+
+// ##### WISHLIST #####
+
+void Service::empty(){
+    this->wish->empty();
+}
+
+vector<Produs> Service::getWish(){
+    return this->wish->getList();
+}
+
+void Service::addWish(int i){
+    int verif = this->repo->findById(i);
+    if(verif < 0)
+        throw Except("There is no Produs with that ID");
+    vector<Produs> in = this->getList();
+    Produs p;
+    for(long unsigned int j = 0 ; j < in.size(); j++){
+        if(in[j].getID() == i){
+            p = in[j];
+            break;
+        }
+    }
+    this->wish->add(p);
+}
+
+// #####
 
 vector<Produs> Service::getList(){
     /**
@@ -22,13 +50,60 @@ int Service::genID(){
     vector<Produs> out;
     out = this->getList();
     int nextId = 0;
-    for(long unsigned int i = 0; i < out.size(); i++){
-        if(out[i].getID() != (int)i){
+    int i = 0;
+    for(auto p : out){
+        if(p.getID() != (int)i){
             return i;
         }
-        nextId = out[i].getID() + 1;
+        nextId = p.getID() + 1;
+        i++;
     }
     return nextId;
+}
+
+
+float Service::raport(int mode, char field[30]){
+    /**
+     * Functie de filtrare dupa criteriu
+     * 
+     * @param mode(int)
+     * @param field(string)
+     * 
+     * @return Lista filtrata
+     */
+
+    vector<Produs> out;
+    vector<Produs> pl = this->getList();
+    if(pl.size() < 1){
+        throw Except("Not long enough");
+    }
+
+    for(auto p : pl){
+        switch (mode)
+        {
+            case 1:{
+                if(strcmp(p.getNume().c_str(),field) == 0){
+                    out.push_back(p);
+                }
+                break;
+            }
+            case 2:{
+                if(strcmp(p.getTip().c_str(),field) == 0){
+                    out.push_back(p);
+                }
+                break;
+            }
+            case 3:{
+                if(strcmp(p.getProducator().c_str(),field) == 0){
+                    out.push_back(p);
+                }
+                break;
+            }
+    
+        }
+    }
+
+    return (float)(out.size())/ (float)(pl.size());
 }
 
 vector<Produs> Service::filter(int mode, char field[30]){
@@ -42,29 +117,29 @@ vector<Produs> Service::filter(int mode, char field[30]){
      */
 
     vector<Produs> out;
-    vector<Produs> p = this->getList();
-    if(p.size() < 1){
-        throw 1;
+    vector<Produs> pl = this->getList();
+    if(pl.size() < 1){
+         throw Except("Not long enough");
     }
 
-    for(long unsigned int i = 0; i < p.size();i++){
+    for(auto p : pl){
         switch (mode)
         {
             case 1:{
-                if(strcmp(p[i].getNume().c_str(),field) == 0){
-                    out.push_back(p[i]);
+                if(strcmp(p.getNume().c_str(),field) == 0){
+                    out.push_back(p);
                 }
                 break;
             }
             case 2:{
-                if(strcmp(p[i].getTip().c_str(),field) == 0){
-                    out.push_back(p[i]);
+                if(strcmp(p.getTip().c_str(),field) == 0){
+                    out.push_back(p);
                 }
                 break;
             }
             case 3:{
-                if(strcmp(p[i].getProducator().c_str(),field) == 0){
-                    out.push_back(p[i]);
+                if(strcmp(p.getProducator().c_str(),field) == 0){
+                    out.push_back(p);
                 }
                 break;
             }
@@ -73,6 +148,7 @@ vector<Produs> Service::filter(int mode, char field[30]){
     }
     return out;
 }
+
 
 vector<Produs> Service::sort(int mode, int dir){
     /**
@@ -85,7 +161,7 @@ vector<Produs> Service::sort(int mode, int dir){
 
     vector<Produs> out = this->getList();
     if(out.size() < 1){
-        throw 1;
+         throw Except("Not long enough");
     }
 
     bool check = false;
@@ -194,6 +270,7 @@ void Service::addService(int pret, char nume[30], char tip[30], char producator[
     if(id == -1){
         id = this->genID();
     }
+
     Produs p(id, pret,nume,tip,producator);
     this->repo->addRepo(p);
 }
@@ -207,7 +284,7 @@ void Service::delService(int id){
 
     int verif = this->repo->findById(id);
     if(verif < 0)
-        throw "There is no Produs with that ID";
+        throw Except("There is no Produs with that ID");
     this->repo->delRepo(verif);
 }
 
@@ -226,6 +303,6 @@ void Service::modService(int id,int pret, char nume[30], char tip[30], char prod
         this->delService(id);
         this->addService(pret,nume,tip,producator,id);
     }catch (const char* e){
-        throw "Error in modify : There is no Produs with that ID in the list";
+        throw Except("There is no Produs with that ID");
     }
 }

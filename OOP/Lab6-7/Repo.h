@@ -1,6 +1,9 @@
 #pragma once
-#include <bits/stdc++.h>
+#include <iostream>
 #include "Produs.h"
+#include <bits/stdc++.h>
+
+using namespace std;
 
 class Repo{
     private:

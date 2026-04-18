@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 using namespace std;
@@ -11,6 +12,7 @@ private:
     string producator;
 
 public:
+    Produs() = default;
     Produs(int ID ,int pret, string nume, string tip, string producator);
     int getPret();
     int getID();

@@ -33,10 +33,12 @@ int Repo::findById(int id){
      * 
      * @return int
      */
-    for(long unsigned int i = 0; i < this->lista.size(); i++){
-        if(this->lista[i].getID() == id){
+    int i = 0;
+    for(auto l : this->lista){
+        if(l.getID() == id){
             return i;
         }
+        i++;
     }
     return -1;
 }
