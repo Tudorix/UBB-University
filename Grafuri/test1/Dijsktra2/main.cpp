@@ -13,14 +13,14 @@ int t[MS];
 
 void Dijsktra(int s){
     for(int i = 1; i <= n; i++){
-        d[i] = INF;
         viz[i] = 0;
+        d[i] = INF;
         t[i] = 0;
     }
 
     d[s] = 0;
 
-    for(int i = 1; i <= n; i++){
+    for(int i = 0; i < n; i++){
         int x = -1;
 
         for(int j = 1; j <= n; j++){

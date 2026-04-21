@@ -55,7 +55,7 @@ TElem Matrice::element(int i, int j) const{
 	return NULL_TELEMENT;
 }
 
-
+// O(n^2)
 TElem Matrice::modifica(int i, int j, TElem e) {
 	if((i >= this->nrLin || j >= this->nrCol) || (i < 0 || j < 0)){
 		throw std::runtime_error("Indici Invalizi");
@@ -89,7 +89,9 @@ TElem Matrice::modifica(int i, int j, TElem e) {
 		}
 
 		if(p->coloana == j && p->linie == i){
+			TElem old = p->valoare;
 			p->valoare = e;
+			return old;
 		}else{
 			Nod *q = new Nod();
 			q->coloana = j;
@@ -106,6 +108,29 @@ TElem Matrice::modifica(int i, int j, TElem e) {
 		}
 	}
 	return NULL_TELEMENT;
+}
+
+// O(m * n^3)
+void Matrice::transpusa(){
+	int m = this->nrCol;
+	int n = this->nrLin;
+
+	int aux[n][m] = {0};
+
+	for(int i = 0; i < n; i++){
+		for(int j = 0; j < m; j++){
+			if(aux[i][j] == 0){
+				int x = element(i,j);// O(n^2)
+				int y = element(j,i);// O(n^2)
+
+				modifica(i,j,y);// O(n^2)
+				modifica(j,i,x);// O(n^2)
+
+				aux[i][j] = 1;
+				aux[j][i] = 1;
+			}
+		}
+	}
 }
 
 

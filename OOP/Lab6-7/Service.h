@@ -30,4 +30,5 @@ class Service{
         vector<Produs> getWish();
         void addWish(int i);
         void generateWish(int nr);
+        void exportWishlist(char *nume);
 };

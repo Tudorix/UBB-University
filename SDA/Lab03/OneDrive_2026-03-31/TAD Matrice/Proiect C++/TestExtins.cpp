@@ -98,11 +98,44 @@ void testExceptii() {
 	}
 }
 
+void testTranspusa(){
+	Matrice m(10,10);
+	m.modifica(1,2,5);
+	m.modifica(4,7,10);
+	m.modifica(8,2,15);
+	m.modifica(2,8,20);
 
+	m.transpusa();
+
+	int x = m.element(1,2);
+	int y = m.element(2,1);
+
+	assert(x == NULL_TELEMENT);
+	assert(y == 5);
+
+	x = m.element(4,7);
+	y = m.element(7,4);
+
+	assert(x == NULL_TELEMENT);
+	assert(y == 10);
+
+	x = m.element(8,2);
+	y = m.element(2,8);
+
+	assert(x == 20);
+	assert(y == 15);
+
+	x = m.element(4,2);
+	y = m.element(2,4);
+
+	assert(x == NULL_TELEMENT);
+	assert(y == NULL_TELEMENT);
+}
 
 void testAllExtins() {
 	testCreeaza();
 	testAdauga();
 	testQuantity();
 	testExceptii();
+	testTranspusa();
 }

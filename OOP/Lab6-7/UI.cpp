@@ -49,7 +49,9 @@ void UI::run(){
         cout << "Wishlist:\n";
         cout << "9 - Empty\n";
         cout << "10 - Print Wishlist\n";
-        cout << "11 - Add item to wishlist\n";
+        cout << "11 - Add item to Wishlist\n";
+        cout << "12 - Generate Wishlist\n";
+        cout << "13 - Export Wishlist\n";
         cout << "0 - Exit\n";
         cout << "Enter a command : \n>>>";
         cin.getline(com, 30);
@@ -202,6 +204,19 @@ void UI::run(){
             }catch(const Except &e){
                 cout << "Task unsuccessful : " << e.what() << "\n";
             }
+        }
+        if(strcmp(com, "12") == 0){
+            int nr = readNum("number of elements");
+            try{
+                this->service->generateWish(nr);
+            }catch(const Except &e){
+                cout << "Task unsuccessful : " << e.what() << "\n";
+            }
+        }
+        if(strcmp(com, "13") == 0){
+            char nume[35];
+            readString("nume",nume);
+            this->service->exportWishlist(nume);
         }
         if(strcmp(com, "0") == 0){
             cout << "Goodbye!\n";

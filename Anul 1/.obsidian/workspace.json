@@ -76,9 +76,23 @@
               "icon": "lucide-file",
               "title": "THREADS"
             }
+          },
+          {
+            "id": "32e29236cedf0806",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "OperatingSystems/Notes/C/PIPE.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "PIPE"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -226,35 +240,36 @@
       "bases:Create new base": false
     }
   },
-  "active": "694b1aee01aaedfc",
+  "active": "32e29236cedf0806",
   "lastOpenFiles": [
-    "OperatingSystems/Notes/LINUX/Filtre/SED.md",
+    "OOP/Notes/Notes.md",
+    "SD/LAB.md",
+    "SistemeDinamice/Lab01.md",
+    "OperatingSystems/Study.md",
+    "OperatingSystems/Main.md",
+    "OperatingSystems/Notes/COMENZI.md",
+    "OperatingSystems/Notes/C/PIPE.md",
     "OperatingSystems/Notes/C/THREADS.md",
     "OperatingSystems/Notes/LINUX/BASH.md",
-    "OperatingSystems/Notes/LINUX/Filtre/AWK.md",
-    "OperatingSystems/Notes/LINUX/PROCESE.md",
-    "OperatingSystems/Notes/C/EXEC.md",
-    "OperatingSystems/Main.md",
-    "OperatingSystems/Notes/LINUX/Filtre/GREP.md",
-    "OperatingSystems/Study.md",
-    "OperatingSystems/STUD",
+    "OperatingSystems/Notes/LINUX/TEST  & CHMOD (curs02).md",
     "OperatingSystems/Notes/Race Condition.md",
-    "OperatingSystems/Notes/COMENZI.md",
+    "OperatingSystems/Notes/C/Comenzi.md",
+    "OperatingSystems/Notes/C/MALLOC.md",
+    "OperatingSystems/Notes/C/EXEC.md",
+    "OperatingSystems/Notes/C/STDIO, STDE (curs02).md",
+    "OperatingSystems/Notes/LINUX/PROCESE.md",
+    "OperatingSystems/Notes/LINUX/Filtre/SED.md",
+    "OperatingSystems/Notes/LINUX/Filtre/AWK.md",
+    "OperatingSystems/Notes/LINUX/Filtre/GREP.md",
+    "OperatingSystems/STUD",
     "OperatingSystems/Notes/VIM.md",
     "OperatingSystems/Notes/Cursuri.md",
-    "OperatingSystems/Notes/LINUX/TEST  & CHMOD (curs02).md",
     "Fundamentele Programarii/Semniare/Seminar 5.md",
     "Fundamentele Programarii/Semniare/Seminar 2.md",
     "OperatingSystems/Notes/LINUX/Filtre",
-    "SD/LAB.md",
-    "OOP/Notes/Notes.md",
     "SD/Untitled",
     "SD",
-    "OperatingSystems/Notes/C/Comenzi.md",
-    "OperatingSystems/Notes/C/STDIO, STDE (curs02).md",
-    "OperatingSystems/Notes/C/MALLOC.md",
     "OperatingSystems/Notes/LINUX",
-    "SistemeDinamice/Lab01.md",
     "OperatingSystems/Notes/C",
     "SistemeDinamice/LAB01/Lb1_Exercitii.pdf",
     "SistemeDinamice/LAB01",
@@ -263,7 +278,6 @@
     "OOP/Notes",
     "Fundamentele Programarii/Semniare/Seminar 1.md",
     "Fundamentele Programarii/Semniare/Seminar 8.md",
-    "Fundamentele Programarii/Semniare/Seminar 6.md",
     "Logica Computationala/Pasted image 20251002174806.png"
   ]
 }

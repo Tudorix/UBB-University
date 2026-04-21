@@ -1,4 +1,5 @@
 #include "Service.h"
+#include <cstdlib>
 
 Service::Service (Repo *repo, Valid valid, Wishlist *wishlist){
     /**
@@ -20,6 +21,30 @@ void Service::empty(){
 
 vector<Produs> Service::getWish(){
     return this->wish->getList();
+}
+
+void Service::generateWish(int nr){
+    int i = 0;
+    while(i < nr){
+        int id = rand() % this->getList().size();
+        int index = this->repo->findById(id);
+        if(index != -1){
+            vector<Produs> in = this->getList();
+            Produs p;
+            for(long unsigned int j = 0 ; j < in.size(); j++){
+                if(in[j].getID() == id){
+                    p = in[j];
+                    break;
+                }
+            }
+            this->wish->add(p);
+            i++;
+        }
+    }
+}
+
+void Service::exportWishlist(char *nume){
+    this->wish->Export(nume);
 }
 
 void Service::addWish(int i){
