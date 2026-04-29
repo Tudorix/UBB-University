@@ -52,6 +52,9 @@ void UI::run(){
         cout << "11 - Add item to Wishlist\n";
         cout << "12 - Generate Wishlist\n";
         cout << "13 - Export Wishlist\n";
+        cout << "15 - Remove Duplicates\n";
+        cout << "\n";
+        cout << "14 - Undo\n";
         cout << "0 - Exit\n";
         cout << "Enter a command : \n>>>";
         cin.getline(com, 30);
@@ -225,6 +228,10 @@ void UI::run(){
             }catch(const Except &e){
                 cout << "Task unsuccessful : " << e.what() << "\n";
             }
+        }
+        if(strcmp(com, "15") == 0){
+            this->service->removeDuplicates();
+            cout << "Duplicates removed successfully!\n";
         }
         if(strcmp(com, "0") == 0){
             cout << "Goodbye!\n";

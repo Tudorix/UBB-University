@@ -8,7 +8,7 @@ using namespace std;
 
 class Undo{
     public:
-        virtual ~Undo();
+        virtual ~Undo() = default;
         virtual void undo() = 0;
 };
 

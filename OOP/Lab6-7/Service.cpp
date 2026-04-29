@@ -27,6 +27,25 @@ void Service::undo(){
 
 // ##### WISHLIST #####
 
+void Service::removeDuplicates(){
+    std::vector<Produs> in;
+    in = this->wish->getList();    
+
+    std::sort(in.begin(), in.end(), []( Produs& a,  Produs& b) {
+        return a.getID() < b.getID();
+    });
+
+    auto it = std::unique(in.begin(), in.end(), [](Produs& a,Produs& b) {
+        return a.getID() == b.getID();
+    });
+
+    in.erase(it, in.end());
+    this->wish->empty();
+    for(auto p : in){
+        this->wish->add(p);
+    }
+}
+
 void Service::empty(){
     this->wish->empty();
 }

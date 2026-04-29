@@ -241,6 +241,21 @@ void testWishExport(Service *s){
     }
 }
 
+void testUndo(Service *s){
+    assert(s->getList().size() == 10);
+
+    s->undo();
+    assert(s->getList().size() == 9);
+    for(unsigned long int i = 0; i < 100; i++){
+        try{
+            s->undo();
+        }catch(const Except& e){
+            assert(true);
+            break;
+        }
+    }
+}
+
 int main(){
     vector<Produs> lista;
     vector<Produs> wishlist;
@@ -265,6 +280,7 @@ int main(){
     testWishEmpty(&srv);
     testWishGenerate(&srv);
     testWishExport(&srv);
+    testUndo(&srv);
 
     cout << "Finished Tests!\n";
     return 0;

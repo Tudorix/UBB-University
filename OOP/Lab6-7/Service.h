@@ -35,4 +35,6 @@ class Service{
         void addWish(int i);
         void generateWish(int nr);
         void exportWishlist(char *nume);
+
+        void removeDuplicates();
 };
