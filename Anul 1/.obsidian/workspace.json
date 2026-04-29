@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OperatingSystems/Notes/C/PIPE.md",
+                "file": "OperatingSystems/Notes/C/THREADS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PIPE"
+              "title": "THREADS"
             }
           }
         ],
@@ -242,13 +242,13 @@
   },
   "active": "32e29236cedf0806",
   "lastOpenFiles": [
+    "OperatingSystems/Notes/C/PIPE.md",
     "OOP/Notes/Notes.md",
     "SD/LAB.md",
     "SistemeDinamice/Lab01.md",
     "OperatingSystems/Study.md",
     "OperatingSystems/Main.md",
     "OperatingSystems/Notes/COMENZI.md",
-    "OperatingSystems/Notes/C/PIPE.md",
     "OperatingSystems/Notes/C/THREADS.md",
     "OperatingSystems/Notes/LINUX/BASH.md",
     "OperatingSystems/Notes/LINUX/TEST  & CHMOD (curs02).md",

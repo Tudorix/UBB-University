@@ -19,29 +19,19 @@ int viz[MS];
 int d[MS];
 
 void BF(int s){
-    h[s] = 0;
+    d[s] = 0;
 
-    for(int i = 0; i <= n; i++){
+    for(int i = 0; i < n - 1; i++){
         for(int j = 0; j < m + n; j++){
             int x = e[j].x;
             int y = e[j].y;
             int c = e[j].c;
 
-            if(h[x] != INF && (h[y] > h[x] + c)){
-                h[y] = h[x] + c;
+            if(d[x] != INF && d[y] > d[x] + c){
+                d[y] = d[x] + c;
             }
         }
     }
-
-    for(int j = 0; j < m + n; j++){
-            int x = e[j].x;
-            int y = e[j].y;
-            int c = e[j].c;
-
-            if(h[x] != INF && (h[y] > h[x] + c)){
-                cout << "-1"; exit(0);
-            }
-        }
 }
 
 void D(){

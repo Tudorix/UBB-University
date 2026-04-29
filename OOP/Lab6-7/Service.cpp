@@ -1,4 +1,5 @@
 #include "Service.h"
+#include "Undo.h"
 #include <cstdlib>
 
 Service::Service (Repo *repo, Valid valid, Wishlist *wishlist){
@@ -11,6 +12,17 @@ Service::Service (Repo *repo, Valid valid, Wishlist *wishlist){
     this->repo = repo;
     this->valid = valid;
     this->wish = wishlist;
+    this->undoList = vector<Undo*>();
+}
+
+// ##### UNDOLIST #####
+
+void Service::undo(){
+    if(undoList.size() < 1){
+        throw Except("There is nothing to undo");
+    }
+    undoList.back()->undo();
+    undoList.pop_back();
 }
 
 // ##### WISHLIST #####
@@ -282,6 +294,8 @@ int Service::find(int id){
     return index;
 }
 
+//--------------------------------------------------------------------------
+
 void Service::addService(int pret, char nume[30], char tip[30], char producator[30], int id){
     /**
      * Functie care adauga produs
@@ -298,6 +312,8 @@ void Service::addService(int pret, char nume[30], char tip[30], char producator[
 
     Produs p(id, pret,nume,tip,producator);
     this->repo->addRepo(p);
+
+    undoList.push_back(new UndoAdd(this->repo, p));
 }
 
 void Service::delService(int id){
@@ -310,6 +326,15 @@ void Service::delService(int id){
     int verif = this->repo->findById(id);
     if(verif < 0)
         throw Except("There is no Produs with that ID");
+
+    for(auto p : this->getList()){
+        if(p.getID() == id){
+            Produs aux = p;
+            undoList.push_back(new UndoDel(this->repo, aux));
+            break;
+        }
+    }
+
     this->repo->delRepo(verif);
 }
 
@@ -325,9 +350,20 @@ void Service::modService(int id,int pret, char nume[30], char tip[30], char prod
      */
 
     try{
+        Produs nou = Produs(id, pret,nume,tip,producator);
+        for(auto p : this->getList()){
+            if(p.getID() == id){
+                Produs aux = p;
+                undoList.push_back(new UndoMod(this->repo, nou, aux));
+                break;
+            }
+        }
+        
         this->delService(id);
         this->addService(pret,nume,tip,producator,id);
-    }catch (const char* e){
+        undoList.pop_back();
+        undoList.pop_back();
+    }catch (const Except& e){
         throw Except("There is no Produs with that ID");
     }
 }

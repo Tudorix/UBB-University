@@ -218,6 +218,14 @@ void UI::run(){
             readString("nume",nume);
             this->service->exportWishlist(nume);
         }
+        if(strcmp(com, "14") == 0){
+            try{
+                this->service->undo();
+                cout << "Undo successful!\n";
+            }catch(const Except &e){
+                cout << "Task unsuccessful : " << e.what() << "\n";
+            }
+        }
         if(strcmp(com, "0") == 0){
             cout << "Goodbye!\n";
             running = false;

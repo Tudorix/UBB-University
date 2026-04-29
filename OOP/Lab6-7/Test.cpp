@@ -13,15 +13,15 @@ void testExtCase(Service *s){
     vector<Produs> rez;
     try{
         rez = s->filter(1, (char*)"Core Hex Motor");
-    }catch(int e){}
+    }catch(const Except& e){}
 
     try{
         rez = s->sort(3, 0);
-    }catch(int e){}
+    }catch(const Except& e){}
 
     try{
-        s->modService(1, 999, (char*)"Core Hex Motor", (char*)"Motoare", (char*)"REV");
-    }catch (const char* e){}
+        s->modService(100, 999, (char*)"Core Hex Motor", (char*)"Motoare", (char*)"REV");
+    }catch (const Except& e){}
 }
 
 void testAdd(Service *s){
@@ -41,7 +41,7 @@ void testDel(Service *s){
     assert(s->getList().size() == 2);
     try{
         s->delService(0);
-    }catch(const char* e){}
+    }catch(const Except& e){}
     assert(s->getList().size() == 2);
 }
 
@@ -160,6 +160,87 @@ void testSort(Service *s){
     rez = s->sort(2, 0);
 }
 
+void testWishAdd(Service *s){
+    s->empty();
+    assert(s->getWish().size() == 0);
+
+    s->addWish(1);
+    assert(s->getWish().size() == 1);
+    assert(s->getWish()[0].getID() == 1);
+
+    s->addWish(2);
+    assert(s->getWish().size() == 2);
+    assert(s->getWish()[1].getID() == 2);
+
+    try{
+        s->addWish(999);
+        assert(false);
+    }catch(const Except& e){
+        assert(true);
+    }catch(...){
+        assert(false);
+    }
+}
+
+void testWishGet(Service *s){
+    s->empty();
+    assert(s->getWish().size() == 0);
+
+    s->addWish(1);
+    s->addWish(2);
+
+    vector<Produs> w = s->getWish();
+    assert(w.size() == 2);
+    assert(w[0].getID() == 1);
+    assert(w[1].getID() == 2);
+}
+
+void testWishEmpty(Service *s){
+    s->addWish(1);
+    s->addWish(2);
+    assert(s->getWish().size() >= 2);
+
+    s->empty();
+    assert(s->getWish().size() == 0);
+}
+
+void testWishGenerate(Service *s){
+    s->empty();
+    assert(s->getWish().size() == 0);
+
+    srand(1);
+    s->generateWish(3);
+
+    assert(s->getWish().size() == 3);
+
+    vector<Produs> all = s->getList();
+    vector<Produs> wish = s->getWish();
+
+    for(long unsigned int i = 0; i < wish.size(); i++){
+        bool found = false;
+        for(long unsigned int j = 0; j < all.size(); j++){
+            if(wish[i].getID() == all[j].getID()){
+                found = true;
+                break;
+            }
+        }
+        assert(found);
+    }
+}
+
+void testWishExport(Service *s){
+    s->empty();
+    s->addWish(1);
+    s->addWish(2);
+
+    try{
+        s->exportWishlist((char*)"wishlist_test.html");
+        assert(true);
+    }catch(...){
+        assert(false);
+    }
+}
+
 int main(){
     vector<Produs> lista;
     vector<Produs> wishlist;
@@ -177,6 +258,13 @@ int main(){
     testFind(&srv);
     testFilter(&srv);
     testSort(&srv);
+
+    // Wishlist tests
+    testWishAdd(&srv);
+    testWishGet(&srv);
+    testWishEmpty(&srv);
+    testWishGenerate(&srv);
+    testWishExport(&srv);
 
     cout << "Finished Tests!\n";
     return 0;
