@@ -1,12 +1,14 @@
 #include <iostream>
-#include "UI.h"
 #include <bits/stdc++.h>
 #include "Exception.h"
 #include "Wishlist.h"
 
+#include <QApplication>
+#include "GUI.h"
+
 using namespace std;
 
-int main(){
+int main(int argc, char** argv){
     // Init
     vector<Produs> lista;
     vector<Produs> wishlist;
@@ -16,8 +18,9 @@ int main(){
     Valid valid;
     Service srv(&repo,valid,&wish);
 
-    UI console(&srv);
-    console.run();
+    QApplication app(argc, argv);
+    GUI gui(&srv);
+    gui.show();
 
-    return 0;
+    return app.exec();
 }

@@ -6,6 +6,7 @@
 #include <exception>
 using namespace std;
 
+// Theta(1)
 MDO::MDO(Relatie r) {
 	this->r = r;
 	this->prim = nullptr;
@@ -13,7 +14,7 @@ MDO::MDO(Relatie r) {
 	this->dimensiune = 0;
 }
 
-
+// O(n)
 void MDO::adauga(TCheie c, TValoare v) {
 	if(this->prim == nullptr)
 	{
@@ -69,6 +70,7 @@ void MDO::adauga(TCheie c, TValoare v) {
 	}
 }
 
+// O(n)
 vector<TValoare> MDO::cauta(TCheie c) const {
 	Nod_dict* nod = this->prim;
 	while(nod != nullptr && nod->cheie != c)
@@ -78,6 +80,7 @@ vector<TValoare> MDO::cauta(TCheie c) const {
 	return nod != nullptr ? nod->valori : vector<TValoare>();
 }
 
+// O(m) - unde m = nr de perechi (cheie,valoare)
 bool MDO::sterge(TCheie c, TValoare v) {
 	Nod_dict* nod = this->prim;
 	while(nod != nullptr && nod->cheie != c)
@@ -119,19 +122,23 @@ bool MDO::sterge(TCheie c, TValoare v) {
 	return false;
 }
 
+//Theta(1)
 int MDO::dim() const {
 	return this->dimensiune;
 	return 0;
 }
 
+//Theta(1)
 bool MDO::vid() const {
 	return dimensiune == 0;
 }
 
+//Theta(1)
 IteratorMDO MDO::iterator() const {
 	return IteratorMDO(*this);
 }
 
+// O(n)
 MDO::~MDO() {
 	Nod_dict* nod = this->prim;
 	while(nod != nullptr)

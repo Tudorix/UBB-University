@@ -1,0 +1,16 @@
+total 116
+drwxrwxr-x 3 tudorix tudorix  4096 mai  4 14:29 .
+drwxrwxr-x 3 tudorix tudorix  4096 mai  2 15:04 ..
+-rwxrwxr-x 1 tudorix tudorix 16208 mai  2 16:10 DUP
+-rw-rw-r-- 1 tudorix tudorix   396 mai  4 14:21 dup.c
+-rw-rw-r-- 1 tudorix tudorix   454 mai  4 14:29 ex.c
+-rwxrwxr-x 1 tudorix tudorix 16088 mai  2 16:12 EXEC
+-rw-rw-r-- 1 tudorix tudorix   185 mai  2 16:12 exec.c
+drwxrwxr-x 2 tudorix tudorix  4096 mai  2 18:42 FIFO
+-rwxrwxr-x 1 tudorix tudorix 16168 mai  2 16:00 FORK
+-rw-rw-r-- 1 tudorix tudorix   284 mai  2 15:59 fork.c
+-rwxrwxr-x 1 tudorix tudorix 16168 mai  4 14:29 OUT
+-rwxrwxr-x 1 tudorix tudorix 16304 mai  2 18:32 PIPE
+-rw-rw-r-- 1 tudorix tudorix   378 mai  2 18:32 pipe.c
+-rw-r--r-- 1 tudorix tudorix    10 mai  2 16:10 testFile
+-rw-r--r-- 1 tudorix tudorix     0 mai  4 14:29 transf.txt

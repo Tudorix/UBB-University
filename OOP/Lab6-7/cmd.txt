@@ -1,4 +1,4 @@
 
-g++ -Wall -Wextra -Werror -o APP main.cpp UI.cpp Produs.cpp Service.cpp Repo.cpp Valid.cpp Wishlist.cpp Undo.h
+g++ -Wall -Wextra -Werror -o APP main.cpp UI.cpp Produs.cpp Service.cpp Repo.cpp Valid.cpp Wishlist.cpp Undo.h GUI.cpp
 
 g++ --coverage -o TEST Test.cpp Service.cpp Repo.cpp Produs.cpp Valid.cpp Wishlist.cpp
