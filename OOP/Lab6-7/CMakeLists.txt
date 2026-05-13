@@ -26,7 +26,9 @@ add_executable(Lab6_7
         vector.h
         vector.tpp
         Wishlist.cpp
-        Wishlist.h)
+        Wishlist.h
+        WishGUI.cpp
+        WishGUI.h)
 
 
 target_link_libraries(Lab6_7 PRIVATE Qt5::Widgets)

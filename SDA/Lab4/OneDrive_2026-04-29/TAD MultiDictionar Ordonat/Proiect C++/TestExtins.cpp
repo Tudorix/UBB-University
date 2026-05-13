@@ -6,6 +6,7 @@
 #include "MDO.h"
 #include "TestExtins.h"
 #include <iostream>
+#include <random>
 
 using namespace std;
 
@@ -163,9 +164,47 @@ void testIterator() {
 	testIterator(desc);
 }
 
+void testTask(Relatie r){
+	MDO d = MDO(r);
+	IteratorMDO it = d.iterator();
+	assert(!it.valid());
+	it.prim();
+	assert(!it.valid());
+	int cMin = 100;
+	int cMax = 300;
+	vector<int> chei = cheiInOrdineAleatoare(cMin, cMax);
+	int n = chei.size();
+	for (int i = 0; i < n; i++) {
+      d.adauga(chei[i], 100);
+	  if (chei[i]%2==0)	{
+		d.adauga(chei[i], 200);
+	  }
+	}
+
+	IteratorMDO itD = d.iterator();
+	assert(itD.valid());
+	itD.prim();
+	assert(itD.valid());
+
+	TCheie cPrec = itD.element().first;
+
+    itD.urmator();
+	while (itD.valid()) {
+		TCheie c = itD.element().first;
+		assert(r(cPrec, c));
+		cPrec = c;
+		try{
+			itD.avanseazaKPasi(5);
+		}catch(exception e){
+			break;
+		}
+	}
+}
+
 void testAllExtins() {
 	testCreeaza();
 	testCauta();
 	testSterge();
 	testIterator();
+	testTask(cresc);
 }

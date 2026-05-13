@@ -49,7 +49,6 @@ int main() {
     for (char ch : text)
         fr[(unsigned char)ch]++;
 
-    // creez noduri initiale
     for (int i = 0; i < 256; i++) {
         if (fr[i] > 0) {
             Nod x;

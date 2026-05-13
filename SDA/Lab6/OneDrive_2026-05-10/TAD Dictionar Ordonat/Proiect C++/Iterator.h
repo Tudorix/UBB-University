@@ -1,21 +1,24 @@
 #pragma once
 
-#include "MDO.h"
+#include <vector>
+#include "DO.h"
 
+using namespace std;
 
-class IteratorMDO{
-	friend class MDO;
+class Iterator{
+	friend class DO;
 private:
-
 	//constructorul primeste o referinta catre Container
 	//iteratorul va referi primul element din container
-	IteratorMDO(const MDO& dictionar);
+	Iterator(const DO& dictionar);
 
 	//contine o referinta catre containerul pe care il itereaza
-	const MDO& dict;
-	int index_valori;
-	int nod_curent;
+	const DO& dict;
 
+	/* aici e reprezentarea specifica a iteratorului */
+	int index;
+	Nod* p;
+	vector<Nod*> curenti;
 
 public:
 
@@ -32,8 +35,5 @@ public:
 		//returneaza valoarea elementului din container referit de iterator
 		//arunca exceptie daca iteratorul nu e valid
 		TElem element() const;
-
-		//muta itreatorul curent la K pozitii fata de 
-		void avanseazaKPasi(int k);
 };
 

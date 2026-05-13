@@ -1,4 +1,9 @@
 #include "Wishlist.h"
+#include <filesystem>
+#include <QDir>
+#include <QDebug>
+
+#include "GUI.h"
 
 Wishlist::Wishlist(vector<Produs> lista){
     /**
@@ -20,8 +25,9 @@ void Wishlist::add(Produs p){
 }
 
 void Wishlist::Export(string fn){
-    ofstream fout(fn + ".csv");
+    ofstream fout("/home/tudorix/UBB/UBB-University/OOP/Lab6-7/" + fn + ".csv");
     for(long unsigned int i = 0; i < this->lista.size(); i++){
         fout << lista[i].getID() << "," << lista[i].getNume() << "," << lista[i].getPret() << "," << lista[i].getProducator() << "," << lista[i].getTip() << "\n";
     }
+    fout.close();
 }

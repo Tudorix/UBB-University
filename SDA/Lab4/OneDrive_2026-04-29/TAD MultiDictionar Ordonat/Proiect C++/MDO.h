@@ -14,10 +14,8 @@ class IteratorMDO;
 
 typedef bool(*Relatie)(TCheie, TCheie);
 
-struct Nod_dict {
-	TCheie cheie;
-	Nod_dict* next;
-	Nod_dict* prev;
+struct NodChei {
+    TCheie cheie;
 	vector<TValoare> valori;
 };
 
@@ -27,9 +25,17 @@ class MDO {
 	/* aici e reprezentarea */
 
 	Relatie r;
-	Nod_dict* prim;
-	Nod_dict* ultim;
-	int dimensiune;
+	NodChei *elems;
+	int *urm;
+	int *ant;
+	int prim, ultim;	
+	int primLiber;
+	int capacitate;
+	int len;
+
+	int aloca();
+	void dealoca(int i);
+	void redim();
 
     public:
 
