@@ -1,0 +1,10 @@
+1,iphone 2,phone,2002,1000
+2,iphone 3,phone,2005,2000
+3,JBL,speaker,2012,500
+4,Sony Headset,headset,2022,4000
+5,Samsung S25,phone,2025,3400
+6,iphone 10,phone,2022,9800
+7,HTC j5,phone,2012,2000
+8,Lenovo Legion,laptop,2015,3000
+9,Asus Vivobook,laptop,2002,1500
+10,Dell Alienware,laptop,2013,4500

@@ -1,70 +1,64 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 105;
-const int INF = 1000000000;
+const int INF = 1e9;
 
-int cost[MAXN][MAXN];
-int d[MAXN];
-bool folosit[MAXN];
-int n, m;
+vector<pair<int,int>> adj[100005]; 
+int distanta[100005];
 
-void Dijkstra(int s) {
-    for (int i = 1; i <= n; i++) {
-        d[i] = INF;
-        folosit[i] = false;
-    }
+void Dijkstra(int start, int n) {
+    for (int i = 1; i <= n; i++)
+        distanta[i] = INF;
 
-    d[s] = 0;
+    distanta[start] = 0;
 
-    for (int step = 1; step <= n; step++) {
-        int x = -1;
+    priority_queue<
+        pair<int,int>,
+        vector<pair<int,int>>,
+        greater<pair<int,int>>
+    > pq;
 
-        for (int i = 1; i <= n; i++) {
-            if (!folosit[i] && (x == -1 || d[i] < d[x])) {
-                x = i;
-            }
-        }
+    pq.push({0, start}); // cost, nod
 
-        if (x == -1 || d[x] == INF) {
-            break;
-        }
+    while (!pq.empty()) {
+        int costCurent = pq.top().first;
+        int nod = pq.top().second;
+        pq.pop();
 
-        folosit[x] = true;
+        if (costCurent != distanta[nod])
+            continue;
 
-        for (int y = 1; y <= n; y++) {
-            if (cost[x][y] != INF) {
-                if (d[y] > d[x] + cost[x][y]) {
-                    d[y] = d[x] + cost[x][y];
-                }
+        for (auto muchie : adj[nod]) {
+            int vecin = muchie.first;
+            int cost = muchie.second;
+
+            if (distanta[vecin] > distanta[nod] + cost) {
+                distanta[vecin] = distanta[nod] + cost;
+                pq.push({distanta[vecin], vecin});
             }
         }
     }
 }
 
 int main() {
-    cin >> n >> m;
+    int n, m, start;
+    cin >> n >> m >> start;
 
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= n; j++) {
-            if (i == j) cost[i][j] = 0;
-            else cost[i][j] = INF;
-        }
-    }
-
-    int x, y, c;
     for (int i = 1; i <= m; i++) {
-        cin >> x >> y >> c;
-        cost[x][y] = c;
-        // cost[y][x] = c; // decomentezi dacă graful e neorientat
+        int x, y, cost;
+        cin >> x >> y >> cost;
+
+        adj[x].push_back({y, cost});
+        // adj[y].push_back({x, cost}); // decomentezi dacă graful e neorientat
     }
 
-    Dijkstra(1);
+    Dijkstra(start, n);
 
-    cout << "Distante minime:\n";
     for (int i = 1; i <= n; i++) {
-        if (d[i] == INF) cout << i << ": INF\n";
-        else cout << i << ": " << d[i] << "\n";
+        if (distanta[i] == INF)
+            cout << "INF ";
+        else
+            cout << distanta[i] << " ";
     }
 
     return 0;

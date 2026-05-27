@@ -32,7 +32,7 @@ private:
     void add();
     void generate();
     void Export();
-
+    
     public:
     WishGUI(Service* srv);
 };

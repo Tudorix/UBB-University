@@ -1,0 +1,8 @@
+A - Algoritmul pornește de la un nod și construiește treptat MST-ul.
+Într-un priority queue sunt puse nodurile vecine împreună cu costul muchiei prin care pot fi conectate la arbore.
+Mereu este ales nodul care poate fi conectat cu cost minim.
+Dacă nodul este deja în arbore, este ignorat. Dacă nu, este adăugat în arbore și sunt analizati vecinii lui.
+Procesul continuă până când toate nodurile sunt adăugate.
+
+B - Algoritmul poate fi folosit pentru proiectarea unei rețele de cabluri,
+conducte sau drumuri astfel încât toate locațiile să fie conectate cu cost total minim.
