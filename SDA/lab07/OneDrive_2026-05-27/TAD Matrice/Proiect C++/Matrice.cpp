@@ -1,5 +1,8 @@
 #include "Matrice.h"
 #include <exception>
+#include <iostream>
+
+#define INF 999999;
 
 using namespace std;
 
@@ -22,6 +25,7 @@ Matrice::Matrice(int m, int n) {
     rad = nullptr;
 }
 
+// O(np), np - nr de noduri din subarborele cu radacina p
 void Matrice::distruge(Nod* p) {
     if (p != nullptr) {
         distruge(p->st);
@@ -72,6 +76,75 @@ Matrice::Nod* Matrice::minim(Nod* p) {
 
     return p;
 }
+
+int Matrice::min_max(){
+    if(this->rad == nullptr){
+        throw exception();
+    }
+
+    return max(this->rad) - min(this->rad);
+}
+
+int Matrice::min(Nod* p){
+    if(p->dr == nullptr && p->st == nullptr){
+        return p->valoare;
+    }
+
+    int st,dr;
+
+    if(p->dr == nullptr){
+        dr = this->rad->valoare;
+    }
+    else{
+        dr = min(p->dr);
+    }
+
+    if(p->st == nullptr){
+        st = this->rad->valoare;
+    }
+    else{
+        st = min(p->st);
+    }
+
+    int mini;
+    if(st < p->valoare) mini = st;
+    else mini = p->valoare;
+
+    if(dr < mini) mini = dr;
+
+    return mini;
+}
+
+int Matrice::max(Nod* p){
+    if(p->dr == nullptr && p->st == nullptr){
+        return p->valoare;
+    }
+
+    int st,dr;
+
+    if(p->dr == nullptr){
+        dr = -this->rad->valoare;
+    }
+    else{
+        dr = max(p->dr);
+    }
+
+    if(p->st == nullptr){
+        st = -this->rad->valoare;
+    }
+    else{
+        st = max(p->st);
+    }
+
+    int mini;
+    if(st > p->valoare) mini = st;
+    else mini = p->valoare;
+
+    if(dr > mini) mini = dr;
+
+    return mini;
+}
+
 
 // O(h), h - inaltimea arborelui
 Matrice::Nod* Matrice::sterge(Nod* p, int i, int j) {

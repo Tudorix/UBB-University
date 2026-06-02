@@ -19,14 +19,20 @@ class Matrice {
 
 private:
 	/* aici e reprezentarea */
-	Nod* rad;
     int linii;
     int coloane;
 
     void distruge(Nod* p);
 	Nod* minim(Nod* p);
+
 	Nod* sterge(Nod* p, int i, int j);
+
+	int min(Nod* p);
+	int max(Nod* p);
 public:
+
+	//Radacina
+	Nod* rad;
 
 	//constructor
 	//se arunca exceptie daca nrLinii<=0 sau nrColoane<=0
@@ -53,6 +59,8 @@ public:
 	// se arunca exceptie daca (i,j) nu e o pozitie valida in Matrice
 	TElem modifica(int i, int j, TElem);
 
+	//Functie care calculeaza diferenta dintre minimul si maximul arborelui
+	int min_max();
 };
 
 

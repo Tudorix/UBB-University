@@ -96,6 +96,30 @@ void testExceptii() {
 	}
 }
 
+void test_min_max(){
+	Matrice m(10,10);
+
+	try{
+		m.min_max();
+	}catch (...){
+		assert(true);
+	}
+
+	m.modifica(1,1,10);
+	m.modifica(2,3,9);
+	m.modifica(4,5,12);
+	m.modifica(4,7,40);
+	m.modifica(9,0,-34);
+	m.modifica(2,4,-100);
+
+	assert(m.min_max() == 140);
+
+	m.modifica(9,0,90);
+	m.modifica(2,4,300);
+
+	assert(m.min_max() == 291);
+}
+
 
 
 void testAllExtins() {
@@ -103,4 +127,5 @@ void testAllExtins() {
 	testAdauga();
 	testQuantity();
 	testExceptii();
+	test_min_max();
 }
