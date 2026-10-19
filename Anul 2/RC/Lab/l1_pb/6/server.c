@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <string.h>
 
-int main(){
+int server(){
     int serverSocket;
 
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+
+    int opt = 1;
+    setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 
     if(serverSocket == -1){
         perror("socket");
@@ -39,17 +43,25 @@ int main(){
         return 1;
     }
 
-    int n;
-    recv(clientSocket, &n, sizeof(n), 0);
+    return clientSocket;
+}
 
-    int x;
-    int sum = 0;
-    for(int i = 0; i < n; i++){
-        recv(clientSocket, &x, sizeof(x), 0);
-        sum += x;
+int main(){
+    int socket = server();
+    char x;
+    char s[256];
+
+    recv(socket, &x, sizeof(x),0);
+    recv(socket, s, sizeof(s),0);
+
+    for(int i = 0; i < strlen(s); i++){
+        if(s[i] == x){
+            send(socket,&i,sizeof(i),0);
+        }
     }
-    
-    send(clientSocket,&sum,sizeof(sum),0);
-    
+
+    int minuz_1 = -1;
+    send(socket,&minuz_1,sizeof(int),0);
+
     return 0;
 }
