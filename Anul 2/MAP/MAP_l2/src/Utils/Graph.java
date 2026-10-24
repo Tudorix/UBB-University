@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface Graph {
 
-    void addEdge(int source, int destination);
-    List<Integer> getNeighbors(int vertex);
+    void addEdge(String source, String destination);
+    List<String> getNeighbors(String vertex);
 
     int getConnectedComponents();
-    List<Integer> getLargestConnectedComponent();
+    List<String> getLargestConnectedComponent();
 }

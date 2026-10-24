@@ -1,11 +1,14 @@
 package Domain;
 
-public class Friendship {
-    private int id;
-    private int user1Id;
-    private int user2Id;
+import java.time.LocalDateTime;
+import java.util.Date;
 
-    public Friendship(int id, int user1Id, int user2Id) {
+public class Friendship extends Entity<Integer> {
+    private String user1;
+    private String user2;
+    private LocalDateTime date;
+
+    public Friendship(int id, String user1, String user2, LocalDateTime date) {
         /**
          * Constructor of the Friendship class
          *
@@ -13,44 +16,40 @@ public class Friendship {
          * @param user1Id the ID of the first user
          * @param user2Id the ID of the second user
          */
-        this.id = id;
-        this.user1Id = user1Id;
-        this.user2Id = user2Id;
+        super(id);
+        this.user1 = user1;
+        this.user2 = user2;
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return "Friendship{" +
-                "id=" + id +
-                ", user1Id=" + user1Id +
-                ", user2Id=" + user2Id +
+                "id=" + super.getId() +
+                ", user1=" + user1 +
+                ", user2=" + user2 +
+                ", date=" + date +
                 '}';
     }
 
-    public int getUser2Id() {
-        /**
-         * Returns the ID of the second user in the friendship.
-         *
-         * @return the ID of the second user
-         */
-        return user2Id;
+    public String getUser1() {
+        return user1;
     }
 
-    public int getUser1Id() {
-        /**
-         * Returns the ID of the first user in the friendship.
-         *
-         * @return the ID of the first user
-         */
-        return user1Id;
+    public String getUser2() {
+        return user2;
     }
 
-    public int getId() {
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public Integer getId() {
         /**
          * Returns the unique identifier of the friendship.
          *
          * @return the unique identifier of the friendship
          */
-        return id;
+        return super.getId();
     }
 }

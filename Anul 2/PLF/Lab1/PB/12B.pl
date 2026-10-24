@@ -18,4 +18,4 @@ sublist([H|T],M,N,Y,I):-
     I1 is 1 + I,
     sublist(T,M,N,Y,I1).
 
-sublist_main(L,M,N,I) = sublist(L,M,N,I,1)
+sublist_main(L,M,N,I) :- sublist(L,M,N,I,1).

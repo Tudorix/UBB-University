@@ -3,7 +3,7 @@ package Utils;
 import java.util.*;
 
 public class AdjacentGraph implements Graph {
-    Map<Integer, List<Integer>> adjacencyList;
+    Map<String, List<String>> adjacencyList;
 
     public AdjacentGraph() {
         /**
@@ -13,7 +13,7 @@ public class AdjacentGraph implements Graph {
     }
 
     @Override
-    public void addEdge(int source, int destination) {
+    public void addEdge(String source, String destination) {
         /**
          * Adds an edge to the graph
          *
@@ -25,7 +25,7 @@ public class AdjacentGraph implements Graph {
     }
 
     @Override
-    public List<Integer> getNeighbors(int vertex) {
+    public List<String> getNeighbors(String vertex) {
         /**
          * Returns the neighbors of a vertex
          *
@@ -42,9 +42,9 @@ public class AdjacentGraph implements Graph {
          *
          * @return the number of connected components
          */
-        Set<Integer> visited = new HashSet<>();
+        Set<String> visited = new HashSet<>();
         int count = 0;
-        for (int vertex : adjacencyList.keySet()) {
+        for (String vertex : adjacencyList.keySet()) {
             if (!visited.contains(vertex)) {
                 DFS(vertex, visited);
                 count++;
@@ -53,7 +53,7 @@ public class AdjacentGraph implements Graph {
         return count;
     }
 
-    private void DFS(int vertex, Set<Integer> visited) {
+    private void DFS(String vertex, Set<String> visited) {
         /**
          * Depth First Search algorithm to traverse the graph
          *
@@ -61,14 +61,14 @@ public class AdjacentGraph implements Graph {
          * @param visited: the set of visited vertices
          */
         visited.add(vertex);
-        for (int neighbor : getNeighbors(vertex)) {
+        for (String neighbor : getNeighbors(vertex)) {
             if (!visited.contains(neighbor)) {
                 DFS(neighbor, visited);
             }
         }
     }
 
-    private void DFS(int vertex, Set<Integer> visited, List<Integer> component) {
+    private void DFS(String vertex, Set<String> visited, List<String> component) {
         /**
          * Depth First Search algorithm to traverse the graph and find connected components
          *
@@ -78,7 +78,7 @@ public class AdjacentGraph implements Graph {
          */
         component.add(vertex);
         visited.add(vertex);
-        for (int neighbor : getNeighbors(vertex)) {
+        for (String neighbor : getNeighbors(vertex)) {
             if (!visited.contains(neighbor)) {
                 DFS(neighbor, visited, component);
             }
@@ -86,20 +86,21 @@ public class AdjacentGraph implements Graph {
     }
 
     @Override
-    public List<Integer> getLargestConnectedComponent() {
+    public List<String> getLargestConnectedComponent() {
         /**
          * Returns the largest connected component in the graph
          *
          * @return the list of vertices in the largest connected component
          */
-        Set<Integer> visited = new HashSet<>();
-        List<Integer> largestComponent = new ArrayList<>();
-        for (int vertex : adjacencyList.keySet()) {
+        Set<String> visited = new HashSet<>();
+        List<String> largestComponent = new ArrayList<>();
+        for (var vertex : adjacencyList.keySet()) {
             if (!visited.contains(vertex)) {
-                List<Integer> currentComponent = new ArrayList<>();
+                List<String> currentComponent = new ArrayList<>();
                 DFS(vertex, visited, currentComponent);
                 if (currentComponent.size() > largestComponent.size()) {
-                    largestComponent = currentComponent;
+                    largestComponent.clear();
+                    largestComponent.addAll(currentComponent);
                 }
             }
         }

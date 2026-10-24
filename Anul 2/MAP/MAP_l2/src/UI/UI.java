@@ -5,6 +5,7 @@ import Domain.User;
 import Service.FriendshipService;
 import Service.UserService;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,38 +28,6 @@ public class UI {
     }
 
     public void start() {
-        /**
-         * Starts the UI
-         */
-
-        // Users
-        userService.addUser("Alice", "alice@example.com", 25, 1);
-        userService.addUser("Bob", "bob@example.com", 30, 2);
-        userService.addUser("Charlie", "charlie@example.com", 35, 3);
-        userService.addUser("David", "david@example.com", 22, 4);
-        userService.addUser("Emma", "emma@example.com", 28, 5);
-        userService.addUser("Frank", "frank@example.com", 31, 6);
-        userService.addUser("Grace", "grace@example.com", 24, 7);
-        userService.addUser("Henry", "henry@example.com", 27, 8);
-        userService.addUser("Ivy", "ivy@example.com", 23, 9);
-        userService.addUser("Jack", "jack@example.com", 29, 10);
-        userService.addUser("Kate", "kate@example.com", 26, 11);
-        userService.addUser("Leo", "leo@example.com", 32, 12);
-        userService.addUser("Mia", "mia@example.com", 21, 13);
-        userService.addUser("Noah", "noah@example.com", 33, 14);
-        userService.addUser("Olivia", "olivia@example.com", 25, 15);
-        friendshipService.addFriendship(1, 1, 2);
-        friendshipService.addFriendship(2, 2, 3);
-        friendshipService.addFriendship(3, 3, 4);
-        friendshipService.addFriendship(4, 4, 5);
-        friendshipService.addFriendship(5, 6, 7);
-        friendshipService.addFriendship(6, 7, 8);
-        friendshipService.addFriendship(7, 8, 9);
-        friendshipService.addFriendship(8, 6, 9);
-        friendshipService.addFriendship(9, 10, 11);
-        friendshipService.addFriendship(10, 11, 12);
-        friendshipService.addFriendship(11, 12, 13);
-        friendshipService.addFriendship(12, 14, 15);
 
         while (running) {
             System.out.println("1. Add User");
@@ -100,7 +69,7 @@ public class UI {
                 case "3":
                     try{
                         System.out.println("List of users:");
-                        ArrayList<User> users = userService.getAllUsers();
+                        Iterable<User> users = userService.getAllUsers();
                         for (User user : users) {
                             System.out.println(user);
                         }
@@ -111,12 +80,13 @@ public class UI {
                     break;
                 case "4":
                     try{
-                        System.out.println("Enter friendship details (id,user1Id,user2Id):");
+                        System.out.println("Enter friendship details (id,user1Id,user2Id,date):");
                         String[] friendshipDetails = scanner.nextLine().split(",");
                         int fid = Integer.parseInt(friendshipDetails[0]);
-                        int user1Id = Integer.parseInt(friendshipDetails[1]);
-                        int user2Id = Integer.parseInt(friendshipDetails[2]);
-                        friendshipService.addFriendship(fid, user1Id, user2Id);
+                        String user1Id = friendshipDetails[1];
+                        String user2Id = friendshipDetails[2];
+                        LocalDateTime date = LocalDateTime.parse(friendshipDetails[3])
+;                        friendshipService.addFriendship(fid, user1Id, user2Id,date);
                     }
                     catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -135,7 +105,7 @@ public class UI {
                     break;
                 case "6":
                     try {
-                        ArrayList<Friendship> friendships = friendshipService.getAllFriendships();
+                        Iterable<Friendship> friendships = friendshipService.getAllFriendships();
                         for (Friendship friendship : friendships) {
                             System.out.println(friendship);
                         }
@@ -158,9 +128,9 @@ public class UI {
                     break;
                 case "8":
                     try {
-                        List<User> largestCommunity = friendshipService.largestCommunity();
+                        List<String> largestCommunity = friendshipService.largestCommunity();
                         System.out.println("Largest community:");
-                        for (User user : largestCommunity) {
+                        for (var user : largestCommunity) {
                             System.out.println(user);
                         }
                     }

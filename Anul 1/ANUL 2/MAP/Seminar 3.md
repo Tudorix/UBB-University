@@ -32,4 +32,3 @@ public class Shape<T>{
 }
 ```
 
-## Colections:

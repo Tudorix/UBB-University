@@ -62,7 +62,7 @@ public class FriendshipRepo {
         return false;
     }
 
-    public boolean existsFriendship(int id1, int id2){
+    public boolean existsFriendship(String u1, String u2){
         /**
          * Checks if a friendship between the two users with the given ids
          * exists in the list of friendships
@@ -72,7 +72,7 @@ public class FriendshipRepo {
          * @return true if the friendship exists, false otherwise
          */
         for(Friendship friendship: friendships){
-            if((friendship.getUser1Id() == id1 && friendship.getUser2Id() == id2) || (friendship.getUser1Id() == id2 && friendship.getUser2Id() == id1)){
+            if((friendship.getUser1().equals(u1) && friendship.getUser2().equals(u2)) || (friendship.getUser1().equals(u2) && friendship.getUser2().equals(u1))){
                 return true;
             }
         }

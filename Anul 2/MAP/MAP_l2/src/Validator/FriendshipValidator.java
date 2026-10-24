@@ -12,16 +12,22 @@ public class FriendshipValidator implements Validator<Friendship> {
          * @param entity: the Friendship entity to be validated
          * @throws ValidationException if the Friendship entity is not valid
          */
+
+        String errors = "";
         if(entity.getId() < 0) {
-            throw new ValidationException("Friendship id cannot be negative");
+            errors += "Friendship id cannot be negative";
         }
 
-        if(entity.getUser1Id() < 0) {
-            throw new ValidationException("User1 id cannot be negative");
+        if(entity.getUser2() == null || entity.getUser2().isEmpty()) {
+            errors += "User2 cannot be null or empty";
         }
 
-        if(entity.getUser2Id() < 0) {
-            throw new ValidationException("User2 id cannot be negative");
+        if(entity.getUser1() == null || entity.getUser1().isEmpty()) {
+            errors += "User1 cannot be null or empty";
+        }
+
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
         }
     }
 }

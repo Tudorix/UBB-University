@@ -5,12 +5,7 @@
 % Result - lista rezultata dupa inlocuire
 % Model de flux : (i,i,i,o)
 
-replace([],_,_,[]).
-replace([H|T],X,Y,[Z|R]):-
-    H = X,
-    Z = Y,
-    replace(T,X,Y,R).
-replace([H|T],X,Y,[Z|R]):-
-    H \= X,
-    Z = H,
-    replace(T,X,Y,R).
+replace([],[]).
+replace([H|T],[Z|R]):-
+    Z is H * 2,
+    replace(T,R).

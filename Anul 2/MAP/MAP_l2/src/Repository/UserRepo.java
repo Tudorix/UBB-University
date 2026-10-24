@@ -43,6 +43,21 @@ public class UserRepo {
         return false;
     }
 
+    public boolean exists(String u){
+        /**
+         * Checks if a user with the given id exists in the list of users
+         *
+         * @param id: the id of the user to be checked
+         * @return true if the user exists, false otherwise
+         */
+        for(User user: users){
+            if(user.getName().equals(u)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ArrayList<User> getAllUsers() {
         /**
          * Returns the list of users

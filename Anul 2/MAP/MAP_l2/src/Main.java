@@ -1,7 +1,11 @@
 import Domain.Friendship;
 import Domain.User;
+import Exceptions.RepositoryException;
+import Exceptions.ValidationException;
 import Repository.FriendshipRepo;
+import Repository.Repository;
 import Repository.UserRepo;
+import Repository.factory.RepositoryFactory;
 import Service.FriendshipService;
 import Service.UserService;
 import UI.UI;
@@ -13,16 +17,27 @@ import Validator.FriendshipValidator;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        String fileName = "users.csv";
-        UserRepo repo = new UserRepo(fileName);
-        Validator<User> validator = new UserValidator();
-        UserService srv = new UserService(repo, validator);
 
-        FriendshipRepo friendshipRepo = new FriendshipRepo("friendships.csv");
-        Validator<Friendship> friendshipValidator = new FriendshipValidator();
-        FriendshipService friendshipService = new FriendshipService(friendshipRepo,repo,friendshipValidator);
+        try {
+            Validator<User> validatorU = new UserValidator();
+            Validator<Friendship> validatorF = new FriendshipValidator();
 
-        UI ui = new UI(srv, friendshipService);
-        ui.start();
+            RepositoryFactory factory = new RepositoryFactory();
+
+            Repository<Integer, User> userRepository =
+                    factory.createUserRepository(validatorU);
+
+            Repository<Integer, Friendship> friendshipRepository =
+                    factory.createFriendshipRepository(validatorF, userRepository);
+
+            UserService userService = new UserService(userRepository, friendshipRepository);
+            FriendshipService friendshipService =
+                    new FriendshipService(friendshipRepository, userService);
+
+            UI ui = new UI(userService, friendshipService);
+            ui.start();
+        } catch (ValidationException | RepositoryException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }

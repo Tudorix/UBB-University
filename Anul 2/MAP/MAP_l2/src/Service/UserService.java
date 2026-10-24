@@ -1,28 +1,31 @@
 package Service;
 
+import Domain.Friendship;
 import Domain.User;
 import Exceptions.DuplicateException;
 import Exceptions.EntityNotFoundException;
+import Repository.Repository;
 import Repository.UserRepo;
 import Validator.Validator;
+import jdk.jfr.Frequency;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class UserService {
-    UserRepo userRepo;
-    Validator<User> userValidator;
+    Repository<Integer, User> userRepo;
+    Repository<Integer, Friendship> friendshipRepo;
 
-    public UserService(UserRepo userRepo, Validator<User> userValidator) {
+    public UserService(Repository<Integer, User> userRepo, Repository<Integer, Friendship> friendshipRepo) {
         /**
          * Constructor of UserService class
          *
          * @param userRepo: the repository of users
-         * @param userValidator: the validator of users
          */
         this.userRepo = userRepo;
-        this.userValidator = userValidator;
+        this.friendshipRepo = friendshipRepo;
     }
-
     public void addUser(String name, String email, int age, int id) {
         /**
          * Adds a user to the list of users
@@ -35,20 +38,34 @@ public class UserService {
          * @throws DuplicateException if the user already exists
          */
         User user = new User(name, email, age, id);
-        userValidator.validate(user);
-        if(userRepo.exists(id)) {
+        if(userRepo.findOne(id) != null) {
             throw new DuplicateException("User with id " + id + " already exists");
         }
-        userRepo.addUser(user);
+        userRepo.save(user);
     }
 
-    public ArrayList<User> getAllUsers() {
+    public Iterable<User> getAllUsers() {
         /**
          * Returns the list of users
          *
          * @return the list of users
          */
-        return userRepo.getAllUsers();
+        return userRepo.findAll();
+    }
+
+    public boolean exists(String name) {
+        /**
+         * Checks if a user with the given name exists in the list of users
+         *
+         * @param name: the name of the user to be checked
+         * @return true if the user exists, false otherwise
+         */
+        for(User user: userRepo.findAll()) {
+            if(user.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void removeUser(int id) {
@@ -59,9 +76,24 @@ public class UserService {
          *
          * @throws EntityNotFoundException if the user with the given id does not exist
          */
-        if(!userRepo.exists(id)) {
+        User user = userRepo.findOne(id);
+
+        if (user == null) {
             throw new EntityNotFoundException("User with id " + id + " not found");
         }
-        userRepo.removeUser(id);
+
+        List<Integer> friendshipsToDelete = new ArrayList<>();
+
+        for (Friendship f : friendshipRepo.findAll()) {
+            if (f.getUser1().equals(user.getName()) || f.getUser2().equals(user.getName())) {
+                friendshipsToDelete.add(f.getId());
+            }
+        }
+
+        for (Integer friendshipId : friendshipsToDelete) {
+            friendshipRepo.delete(friendshipId);
+        }
+
+        userRepo.delete(id);
     }
 }

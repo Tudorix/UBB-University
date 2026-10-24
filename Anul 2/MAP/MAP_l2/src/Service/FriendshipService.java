@@ -5,39 +5,39 @@ import Domain.User;
 import Exceptions.DuplicateException;
 import Exceptions.EntityNotFoundException;
 import Repository.FriendshipRepo;
+import Repository.Repository;
 import Repository.UserRepo;
 import Utils.AdjacentGraph;
 import Utils.Graph;
 import Validator.Validator;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FriendshipService {
-    FriendshipRepo friendshipRepo;
-    UserRepo userRepo;
-    Validator<Friendship> validator;
+    Repository<Integer, Friendship> friendshipRepo;
+    UserService userService;
 
-    public FriendshipService(FriendshipRepo friendshipRepo, UserRepo userRepo, Validator<Friendship> validator) {
+    public FriendshipService(Repository<Integer, Friendship> friendshipRepo, UserService userService) {
         /**
          * Constructor of FriendshipService class
          *
          * @param friendshipRepo: the repository of friendships
-         * @param userRepo: the repository of users
+         * @param userService: the service of users
          * @param validator: the validator of friendships
          */
         this.friendshipRepo = friendshipRepo;
-        this.userRepo = userRepo;
-        this.validator = validator;
+        this.userService = userService;
     }
 
-    public ArrayList<Friendship> getAllFriendships() {
+    public Iterable<Friendship> getAllFriendships() {
         /**
          * Returns the list of friendships
          *
          * @return the list of friendships
          */
-        return friendshipRepo.getAllFriendships();
+        return friendshipRepo.findAll();
     }
 
     public int comunities(){
@@ -47,60 +47,63 @@ public class FriendshipService {
          * @return the number of communities
          */
         Graph graph = new AdjacentGraph();
-        for(Friendship friendship: friendshipRepo.getAllFriendships()){
-            graph.addEdge(friendship.getUser1Id(), friendship.getUser2Id());
+        for(Friendship friendship: friendshipRepo.findAll()){
+            graph.addEdge(friendship.getUser1(), friendship.getUser2());
         }
         return graph.getConnectedComponents();
     }
 
-    public List<User> largestCommunity(){
+    public List<String> largestCommunity(){
         /**
          * Returns the largest community in the social network
          *
          * @return the largest community
          */
         Graph graph = new AdjacentGraph();
-        for(Friendship friendship: friendshipRepo.getAllFriendships()){
-            graph.addEdge(friendship.getUser1Id(), friendship.getUser2Id());
+        for(Friendship friendship: friendshipRepo.findAll()){
+            graph.addEdge(friendship.getUser1(), friendship.getUser2());
         }
-        List<Integer> largestComponent = graph.getLargestConnectedComponent();
-        List<User> users = new ArrayList<>();
-        for(Integer id: largestComponent){
-            for(User user: userRepo.getAllUsers()){
-                if(user.getId() == id){
-                    users.add(user);
-                }
-            }
-        }
-        return users;
+        List<String> largestComponent = graph.getLargestConnectedComponent();
+        return largestComponent;
     }
 
-    public void addFriendship(int id, int id1, int id2) {
+    public void addFriendship(int id, String u1, String u2, LocalDateTime dateTime) {
         /**
          * Adds a friendship between two users
          *
          * @param id: the id of the friendship
-         * @param id1: the id of the first user
-         * @param id2: the id of the second user
+         * @param u1: the username of the first user
+         * @param u2: the username of the second user
          *
          * @throws EntityNotFoundException if one of the users does not exist
          * @throws DuplicateException if the friendship already exists
          */
-        Friendship friendship = new Friendship(id,id1,id2);
-        validator.validate(friendship);
-        if(!userRepo.exists(id1)) {
-            throw new EntityNotFoundException("User with id " + id1 + " not found");
+
+        Friendship friendship = new Friendship(id,u1,u2, dateTime);
+
+        if(!userService.exists(u1)) {
+            throw new EntityNotFoundException("User with id " + u1 + " not found");
         }
-        if(!userRepo.exists(id2)) {
-            throw new EntityNotFoundException("User with id " + id2 + " not found");
+        if(!userService.exists(u2)) {
+            throw new EntityNotFoundException("User with id " + u2 + " not found");
         }
-        if(friendshipRepo.exists(id)) {
+        if(friendshipRepo.findOne(id) != null) {
             throw new DuplicateException("Friendship with id " + id + " already exists");
         }
-        if(friendshipRepo.existsFriendship(id1, id2)) {
-            throw new DuplicateException("Friendship between users " + id1 + " and " + id2 + " already exists");
+        if(existsFriendship(u1, u2)) {
+            throw new DuplicateException("Friendship between users " + u1 + " and " + u2 + " already exists");
         }
-        friendshipRepo.addFriendship(friendship);
+        friendshipRepo.save(friendship);
+    }
+
+    public boolean existsFriendship(String user1, String user2) {
+        for (Friendship f : friendshipRepo.findAll()) {
+            if ((f.getUser1().equals(user1) && f.getUser2().equals(user2)) ||
+                    (f.getUser1().equals(user2) && f.getUser2().equals(user1))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void removeFriendship(int id) {
@@ -111,9 +114,9 @@ public class FriendshipService {
          *
          * @throws EntityNotFoundException if the friendship does not exist
          */
-        if(!friendshipRepo.exists(id)) {
+        if(friendshipRepo.findOne(id) == null) {
             throw new EntityNotFoundException("Friendship with id " + id + " not found");
         }
-        friendshipRepo.removeFriendship(id);
+        friendshipRepo.delete(id);
     }
 }
