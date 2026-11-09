@@ -1,7 +1,6 @@
-1;Ana;ana@example.com;20
-2;Mihai;mihai@example.com;21
-abc;Ioana;ioana@example.com;22
-3;Radu;radu@example.com
-4;Elena;elena@example.com;not_an_age
-5;Daria;invalid-email;19
-6;Sorin;sorin@example.com;23
+1;Ana;ana@gmail.com;20
+2;Mihai;mihai@gmail.com;21
+3;Sorin;sorin@gmail.com;23
+4;Elena;elena@gmail.com;19
+5;Radu;radu@gmail.com;22
+6;Daria;daria@gmail.com;20

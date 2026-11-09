@@ -4,53 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "5fa610a2f2a550a1",
+        "id": "5481253baaf9168d",
         "type": "tabs",
         "children": [
           {
-            "id": "81c44d68c0210336",
+            "id": "9e3b992da749a213",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ANUL 2/MAP/Seminar 4.md",
+                "file": "📋 Lab 4 MAP – Checklist complet.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Seminar 4"
-            }
-          },
-          {
-            "id": "1d2aad90b973d2d9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ANUL 2/DB/Curs 4.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Curs 4"
-            }
-          },
-          {
-            "id": "b1f68b762e1713ba",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ANUL 2/PS/Lab 2.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Lab 2"
+              "title": "📋 Lab 4 MAP – Checklist complet"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -200,13 +171,18 @@
       "bases:Create new base": false
     }
   },
-  "active": "b1f68b762e1713ba",
+  "active": "9e3b992da749a213",
   "lastOpenFiles": [
-    "ANUL 2/DB/Curs 4.md",
-    "ANUL 2/PS/Lab 2.md",
+    "ANUL 2/MAP/Seminar 5.md",
+    "Seminar 5 1.md",
+    "📋 Lab 4 MAP – Checklist complet.md",
+    "ANUL 2/RC/Urs 5.md",
+    "ANUL 2/RC/Urs 6.md",
     "ANUL 2/RC/Curs 4.md",
-    "ANUL 2/PS",
     "ANUL 2/RC/Curs 2.md",
+    "ANUL 2/PS/Lab 2.md",
+    "ANUL 2/DB/Curs 4.md",
+    "ANUL 2/PS",
     "ANUL 2/MAP/Seminar 4.md",
     "ANUL 2/MAP/Seminar 3.md",
     "ANUL 2/DB/SEMINAR 2.md",
@@ -230,11 +206,6 @@
     "ANUL 1/OperatingSystems/Study.md",
     "ANUL 1/OperatingSystems/Main.md",
     "ANUL 1/OperatingSystems/Notes/COMENZI.md",
-    "ANUL 1/OperatingSystems/Notes/LINUX/BASH.md",
-    "ANUL 1/OperatingSystems/Notes/LINUX/TEST  & CHMOD (curs02).md",
-    "ANUL 1/OperatingSystems/Notes/Race Condition.md",
-    "ANUL 1/OperatingSystems/Notes/C/Comenzi.md",
-    "ANUL 1/OperatingSystems/Notes/C/MALLOC.md",
     "OperatingSystems/STUD",
     "ANUL 1/OperatingSystems/Notes/LINUX/Filtre",
     "SD/Untitled",
