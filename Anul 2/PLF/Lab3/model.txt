@@ -1,0 +1,9 @@
+submul(l1..ln,N) = 
+    1. [], daca N = 0
+    2. l1 + submul(l2..ln,N - 1), n > 0 si N > 0
+    3. submul(l2..ln,N), n > 0 si N > 0
+
+main(l1..ln,N) = {
+    findall(submul(l1..ln,N)), daca N > 0
+    false, altfel
+}
